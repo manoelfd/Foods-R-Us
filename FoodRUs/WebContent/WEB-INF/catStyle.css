@@ -1,0 +1,128 @@
+/*category style*/
+#catform {
+	width: 25%;
+	float: left;
+	padding: 40px;
+	border: 1px solid grey;
+	text-align: center;
+}
+
+table td {
+	font: "gill-ss-std", Verdana, Geneva, sans-serif;
+	font-weight: bold;
+}
+
+#catDisplay {
+	box-sizing: border-box;
+	position: relative;
+	height: 700px;
+	padding-bottom: 30px;
+	bottom: -10px;
+}
+
+#catTable {
+	background-color: #ffe5cc;
+	width: 100%;
+}
+
+#catTable td {
+	height: 50px;
+}
+
+#catTable td a {
+	color: green;
+}
+
+#itemDisplay {
+	box-sizing: border-box;
+	position: relative;
+	padding-bottom: 30px;
+	bottom: -10px;
+	overflow: auto;
+}
+
+#itemform {
+	width: 28%;
+	float: left;
+	padding: 20px;
+	border: 1px solid grey;
+	overflow: hidden;
+	height: 180px;
+}
+
+#itemTable {
+	padding-left: 50px;
+	width: 100%;
+}
+
+#itemTable td {
+	color: #ffe6cc;
+	font-size: 12px;
+	font-family: "Century Gothic", "Times New Roman", Times, serif;
+}
+
+#itemTable td label {
+	color: #ffe6cc;
+	font-size: 12px;
+	font-family: "Century Gothic", "Times New Roman", Times, serif;
+}
+
+#itemTable td span {
+	color: Green;
+	font-weight: bold;
+	font-size: 18px;
+	font-family: "Times New Roman", Georgia, Serif;
+}
+
+#itemprice {
+	color: #ffe6cc;
+	font-weight: bold;
+}
+
+#quantity {
+	width: 40px;
+}
+
+#newQty {
+	width: 40px;
+}
+
+#purchasetext {
+	color: #ffffcc;
+	font-weight: bold;
+}
+
+#addcart {
+	padding-left: 5px;
+}
+
+#checkoutSection {
+	margin: 0px auto;
+	float: left;
+	padding-left: 140px;
+	padding-top: 30px;
+}
+
+#checkoutSection form
+{
+	padding: 10px;
+}
+
+#checkoutSection label
+{
+	font-weight: bold;
+	padding-left: 10px;
+}
+#total {
+	float: left;
+}
+
+#msg
+{
+	color: white;
+	font-weight: bold;
+	background-color: red;
+	width: 200px;
+	padding-left: 30px;
+	margin: 20px;
+}

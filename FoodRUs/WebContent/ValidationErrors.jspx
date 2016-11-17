@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="StyleSheet" href="${contextPath}/res/css/errorstyle.css"
+	type="text/css" title="eecs4413" media="screen, print" />
+</head>
+<body>
+
+<c:if test="${not empty requestScope['com.foodrus.util.errors'] }">
+<fieldset>
+	<h3>Validation Errors:</h3>
+	<div id="errorSection">
+	<ul class="errors">
+		<c:forEach items="${requestScope['com.foodrus.util.errors'] }"
+			var="error">
+			<li>${error}</li>
+		</c:forEach>
+	</ul>
+	</div>
+	</fieldset>
+</c:if>
+
+</body>
+	</html>
+</jsp:root>

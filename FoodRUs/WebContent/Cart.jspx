@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root  version="2.0" 
+    xmlns:jsp="http://java.sun.com/JSP/Page" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+    xmlns:food="urn:jsptld:/WEB-INF/tag-lib.tld">
+  <jsp:directive.page contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" />
+  <jsp:output doctype-root-element="html"
+    doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+    omit-xml-declaration="true" />
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  
+    <fmt:setLocale value="en_us"/>
+    
+    <head><link rel="StyleSheet"
+        href="${contextPath}/res/css/catStyle.css"
+        type="text/css" title="eecs4413" media="screen, print" />
+  </head>
+    <h2>Shopping Cart</h2>
+    <div class="table">
+      <div class="tr">
+          <span class="td">Item name</span>
+          <span class="td">Item number</span>
+          <span class="td">Price</span>
+          <span class="td">Stock quantity</span>
+          <span class="td">Total for product</span>
+          <span class="td">Quantity</span>
+          <c:if test="${ empty requestScope['confirmOrder'] or not requestScope['confirmOrder'] }">
+              <span class="td">Update</span>
+              <span class="td">Delete</span>
+          </c:if>
+      </div>
+      <c:choose>
+        <c:when test="${ not empty sessionScope['com.foodrus.util.cart'].items }">
+          <c:forEach items="${sessionScope['com.foodrus.util.cart'].items}" var="shoppingItem">
+            <form class="tr" method="post" action="${contextPath}/action/showCart">
+              <INPUT type="hidden" name="itemNumber" id="itemNumber" value="${shoppingItem.item.number}"/>
+              <span class="td">${shoppingItem.item.name}</span>
+              <span class="td">${shoppingItem.item.number}</span>
+              <span class="td"><fmt:formatNumber type="currency"> ${shoppingItem.item.price}</fmt:formatNumber></span>
+              <span class="td">${shoppingItem.item.qty}</span>
+              <span class="td"><fmt:formatNumber type="currency"> ${shoppingItem.priceBeforeTax}</fmt:formatNumber></span>
+              <c:choose>
+                <c:when test="${ not empty requestScope['confirmOrder'] and requestScope['confirmOrder'] }">
+                  <span class="td">${shoppingItem.qty}</span>
+                </c:when>
+                <c:otherwise>
+                  <span class="td"> <input type="text" name="newQty" id="newQty" value="${shoppingItem.qty}"/> </span>
+                  <span class="td"><input type="submit" name="actionButton" value="Update"/></span>
+                  <span class="td"><input type="submit" name="actionButton" value="Delete"/></span>                
+                </c:otherwise>
+              </c:choose>
+            </form> 
+          </c:forEach>          
+        </c:when>
+        <c:otherwise>
+          <div id="msg">Your cart is empty.</div>
+        </c:otherwise>
+      </c:choose>
+    </div>
+
+    <!-- Total Section -->    
+    <c:if test="${ not empty sessionScope['com.foodrus.util.cart'].items }">
+      <hr size="2" width="700px" align="left"/>
+      <c:set var="taxes" scope="page">
+        <food:math operand1="${sessionScope['com.foodrus.util.cart'].totalPriceBeforeTax}" 
+          operand2="${initParam['HST']}" 
+          operation="mult"/>
+      </c:set>
+      <c:set var="shippingCost" scope="page">
+        ${sessionScope['com.foodrus.util.cart'].totalPriceBeforeTax > initParam['SHIPPINGWAIVE'] ? 0 
+          : initParam['SHIPPINGCOST']}
+      </c:set>
+      <c:set var="taxesAndShipping" scope="page">
+        <food:math operation="add" 
+          operand1="${taxes}" 
+          operand2="${shippingCost}"/>
+      </c:set>
+      <c:set var="grandTotal" scope="page">
+        <food:math operation="add" 
+          operand1=" ${sessionScope['com.foodrus.util.cart'].totalPriceBeforeTax }" 
+          operand2="${taxesAndShipping}"/>
+      </c:set>
+      <div id="total">
+        <TABLE>
+          <tr>
+            <td><LABEL>Sub Total:</LABEL></td>
+            <td>
+              <fmt:formatNumber type="currency">
+                ${sessionScope['com.foodrus.util.cart'].totalPriceBeforeTax }
+              </fmt:formatNumber>
+            </td>
+          </tr>
+          <tr>
+            <td><LABEL>HST:</LABEL></td>
+            <td>
+                <fmt:formatNumber type="currency">
+                  ${taxes}
+                </fmt:formatNumber>
+            </td>
+          </tr>
+          <tr>
+            <td><LABEL>Shipping Cost:</LABEL></td>
+            <td>
+              <fmt:formatNumber type="currency">
+                ${shippingCost}
+              </fmt:formatNumber>
+            </td>
+          </tr>
+          <tr> 
+            <td colspan="2"><hr size="2"/> </td>
+          </tr>
+          <tr>
+            <td><LABEL><strong>Total:</strong></LABEL></td>
+            <td>
+              <strong>
+                <fmt:formatNumber type="currency">
+                  ${ grandTotal }
+                </fmt:formatNumber>
+              </strong>
+            </td>
+          </tr>
+        </TABLE>
+      </div>
+      
+      <!-- Check out & Continue shopping Section -->
+      <div id="checkoutSection" >
+        <c:choose>
+          <c:when test="${ empty requestScope['confirmOrder'] or not requestScope['confirmOrder'] }">
+            <form style="display:inline" action="${contextPath}/action/checkOut">
+              <input type="submit" name="actionButton" id="actionButton"  value="Check out" />
+            </form>
+            <label>Or</label>
+            <form style="display:inline" action="${contextPath}/action/continueShopping">
+              <input type="submit" name="actionButton" id="actionButton" value="Continue Shopping" />
+            </form>
+          </c:when>
+          <c:otherwise>
+            <form style="display:inline" action="${contextPath}/action/checkOut">
+              <input type="submit" name="actionButton" id="actionButton"  value="Confirm order" />
+            </form>
+            <form style="display:inline" action="${contextPath}/action/checkOut">
+              <input type="submit" name="actionButton" id="actionButton"  value="Cancel" />
+            </form>
+            <label>Or</label>
+            <form style="display:inline" action="${contextPath}/action/continueShopping">
+              <input type="submit" name="actionButton" id="actionButton" value="Continue Shopping" />
+            </form>
+          </c:otherwise>  
+        </c:choose>  
+      </div>
+    </c:if>
+  </html>
+</jsp:root>

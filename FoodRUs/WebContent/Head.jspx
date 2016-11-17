@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+  <jsp:directive.page contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" session="true" />
+  <jsp:output doctype-root-element="html"
+    doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+    omit-xml-declaration="true" />
+  <html xmlns="http://www.w3.org/1999/xhtml">
+    <div id="headerSection">
+      <div id="mainLogo">
+        <a href="${contextPath}/action/home"><img src="${contextPath}/res/img/logo4.png"/></a>
+      </div>
+      <div id="search">
+        <form action="${contextPath}/action/search" method="post">
+          <input type="text" id="searchText" name="searchText"/> 
+          <input type="image" id="searchButton" name="searchButton" src="${contextPath}/res/img/sbutton.png" alt="search" />
+        </form>
+      </div>
+      <section id="client-manager">
+        <div id="admin">
+          <ul>
+            <c:if test="${empty sessionScope['com.foodrus.util.loggedIn']}">
+              <li><a href="${contextPath}/action/login"></a>Login</li>
+            </c:if>
+            <c:if test="${not empty sessionScope['com.foodrus.util.loggedIn']}">
+              <li>${sessionScope['com.foodrus.util.userProfile'].account}</li>
+              <li><a href="${contextPath}/action/logout">Log out</a></li>
+            </c:if>
+            
+            <li><a href="#">My Account</a></li>
+          </ul>
+        </div>
+        <br />
+        <div id="cart">
+          <a href="${contextPath}/action/showCart">
+            <img src="${contextPath}/res/img/cart.png" alt="Shopping Cart"/>
+          </a>
+          <span>
+            ${sessionScope['com.foodrus.util.cart'].totalItems} 
+            items 
+            <fmt:formatNumber value="${sessionScope['com.foodrus.util.cart'].totalPriceBeforeTax}" type="currency"/>
+          </span>
+        </div>
+      </section>
+    </div>
+  </html>
+</jsp:root>

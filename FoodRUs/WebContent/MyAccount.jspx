@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root  version="2.0" 
+    xmlns:jsp="http://java.sun.com/JSP/Page" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <jsp:directive.page contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" />
+  <jsp:output doctype-root-element="html"
+    doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+    omit-xml-declaration="true" />
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  
+  <H2> Order List </H2>
+  <c:if test="${ not empty requestScope['com.foodrus.util.poList'] }">
+    <c:forEach items="${requestScope['com.foodrus.util.poList']}" var='poEntry'>
+      <a href="${poEntry.value}">${poEntry.key}</a>
+    </c:forEach>  
+  </c:if>  
+  </html>
+</jsp:root>

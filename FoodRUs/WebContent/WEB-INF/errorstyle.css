@@ -1,0 +1,11 @@
+.errors
+{
+	color: white;
+	font-weight: bold;
+	background-color: red;
+}
+
+#errorSection
+{
+	width: 500px;
+}
