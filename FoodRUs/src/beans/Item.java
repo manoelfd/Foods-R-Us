@@ -1,5 +1,6 @@
 package beans;
 
+
 public class Item
 {
 	private String number;
@@ -131,6 +132,27 @@ public class Item
 				+ ", qty=" + qty + ", onOrder=" + onOrder + ", reOrder="
 				+ reOrder + ", catId=" + catId + ", supId=" + supId
 				+ ", costPrice=" + costPrice + ", unit=" + unit + "]";
+	}
+	
+	public int compare(Item secondItem) {
+		return this.getNumber().compareToIgnoreCase(secondItem.getNumber());
+	}
+	
+	public boolean equals(Object obj) {
+		boolean equals = true;
+		if (obj == null) {
+			equals = false;
+		} 
+		else if (getClass() != obj.getClass()) {
+			equals = false;
+		} 
+		else {
+			Item other = (Item) obj;
+			if (!this.getNumber().equals(other.getNumber())) {
+				equals = false;
+			}
+		}
+		return equals;
 	}
 
 }
