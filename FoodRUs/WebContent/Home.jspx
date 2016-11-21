@@ -9,11 +9,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Insert title here</title>
+      <style> 
+      		body {font-family: "Times New Roman", Georgia, Serif;} 
+      		h1,h2,h3,h4,h5,h6 {font-family: "Playfair Display";letter-spacing: 5px;}
+	  </style>
 </head>
 <body>
 
 	<center><b>Welcome to your food store~</b>
-		<img src="${pageContext.request.contextPath}/res/img/Food_Home.jpg" width="90%" align="middle" hspace="20"/>
+		<img src="${pageContext.request.contextPath}/res/img/home.jpg" width="90%" align="middle" hspace="20"/>
 	</center>
 	
 </body>

@@ -15,18 +15,18 @@ xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"  version="2.0">
       <div id="search">
         <form action="${pageContext.request.contextPath}/action/search" method="post">
           <input type="text" id="searchText" name="searchText"/> 
-          <input type="image" id="searchButton" name="searchButton" src="${pageContext.request.contextPath}/res/img/sbutton.png" alt="search" />
+          <input type="image" id="searchButton" name="searchButton" src="${pageContext.request.contextPath}/res/img/search.png" alt="search" />
         </form>
       </div>
       <section id="client-manager">
         <div id="admin">
           <ul>
             <c:if test="${empty sessionScope['loggedIn']}">
-              <li><a href="${pageContext.request.contextPath}/action/login"></a>Login</li>
+              <li><a href="${pageContext.request.contextPath}/login"></a>Login</li>
             </c:if>
             <c:if test="${not empty sessionScope['loggedIn']}">
-              <li>${sessionScope['com.foodrus.util.userProfile'].account}</li>
-              <li><a href="${pageContext.request.contextPath}/action/logout">Log out</a></li>
+              <li>${sessionScop.account}</li>
+              <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
             </c:if>
             
             <li><a href="#">My Account</a></li>
@@ -38,9 +38,9 @@ xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"  version="2.0">
             <img src="${pageContext.request.contextPath}/res/img/cart.png" alt="Shopping Cart"/>
           </a>
           <span>
-            ${sessionScope['com.foodrus.util.cart'].totalItems} 
+            ${sessionScope.cart.totalItems} 
             items 
-            <fmt:formatNumber value="${sessionScope['com.foodrus.util.cart'].totalPriceBeforeTax}" type="currency"/>
+            <fmt:formatNumber value="${sessionScope.cart.totalPriceBeforeTax}" type="currency"/>
           </span>
         </div>
       </section>

@@ -35,10 +35,6 @@
             <li><a href="${pageContext.request.contextPath}/action/browseCategories">Browse Categories</a></li>
             <li><a href="#">Contact us</a></li>
           </ul>
-          
-        <!--         <div id="promotion">
-            <marquee>Free Shipping over $100 purchase!</marquee>
-          </div>--> 
         </div>  
 
 
