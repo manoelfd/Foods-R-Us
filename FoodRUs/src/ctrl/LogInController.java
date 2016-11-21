@@ -40,13 +40,13 @@ public class LogInController extends HttpServlet
 
 		if(request.getParameter("hash") == null && request.getSession().getAttribute("loggedIn") == null)
 		{
-			String openAuthURL= "https://www.eecs.yorku.ca/~cse31020/auth/Auth.cgi";
-			openAuthURL += "?back=" + request.getRequestURL();
-			response.sendRedirect(openAuthURL);	
+			String authURL= "https://www.eecs.yorku.ca/~cse31020/auth/Auth.cgi";
+			authURL += "?back=" + request.getRequestURL();
+			response.sendRedirect(authURL);	
 		}
 		else{
 			
-			String jsp = "AuthUser.jspx";
+			String page = "auth.jspx";
 			if(request.getSession().getAttribute("loggedIn") == null){
 				request.getSession().setAttribute("hash", request.getParameter("hash"));// for further verification
 				
@@ -58,12 +58,11 @@ public class LogInController extends HttpServlet
 			
 			if(request.getParameter("signout") != null && request.getParameter("signout").equals("Sign Out")){
 				request.getSession().removeAttribute("loggedIn");
-				jsp = "index.html";// or logout page
+				page = "index.html";// or logout page
 			}
 			//request.setAttribute("target", "AuthUser.jspx");
 			
-			this.getServletContext().getRequestDispatcher("/" + jsp) ///Dashboard.jspx
-			.forward(request, response);
+			this.getServletContext().getRequestDispatcher("/" + page).forward(request, response);
 		}
 
 	}
