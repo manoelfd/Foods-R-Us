@@ -11,7 +11,7 @@
 	<li>
 		<figure>
 			<a class="aa-product-img" href="#"><img
-				src="${pageContext.request.contextPath}/img/man/polo-shirt-2.png" alt="polo shirt img"></a>
+				src="${pageContext.request.contextPath}/res/img/man/polo-shirt-2.png" alt="polo shirt img" /></a>
 			<a class="aa-add-card-btn" href="#"><span
 				class="fa fa-shopping-cart"></span>Add To Cart</a>
 			<figcaption>

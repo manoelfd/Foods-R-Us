@@ -1,11 +1,88 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=UTF-8" 
-		pageEncoding="UTF-8" session="false"/>
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="false" />
 	<jsp:output doctype-root-element="html"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
-
-
+	<!-- Products section -->
+	<section id="aa-product">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="aa-product-area">
+							<div class="aa-product-inner">
+								<!-- start prduct navigation -->
+								<!-- here we'd iterate through all categorys and create a tab for them -->
+								<ul class="nav nav-tabs aa-products-tab">
+									<li class="active"><a href="#men" data-toggle="tab">Men</a></li>
+									<li><a href="#women" data-toggle="tab">Women</a></li>
+									<li><a href="#sports" data-toggle="tab">Sports</a></li>
+									<li><a href="#electronics" data-toggle="tab">Electronics</a></li>
+								</ul>
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<!-- Start men product category -->
+									<div class="tab-pane fade in active" id="men">
+										<ul class="aa-product-catg">
+											<jsp:include page="Item.jspx" >
+											<!-- params go here -->
+												<jsp:param name="name" value="name" />												
+												<jsp:param name="number" value="number" />												
+												<jsp:param name="quantity" value="quantity" />
+												<jsp:param name="price" value="price" />
+											</jsp:include>
+										</ul>
+									</div>
+									<!-- / men product category -->
+									<!-- start women product category -->
+									<div class="tab-pane fade" id="women">
+										<ul class="aa-product-catg">
+											<jsp:include page="Item.jspx" >
+											<!-- params go here -->
+												<jsp:param name="name" value="name" />												
+												<jsp:param name="number" value="number" />												
+												<jsp:param name="quantity" value="quantity" />
+												<jsp:param name="price" value="price" />
+											</jsp:include>
+										</ul>
+									</div>
+									<!-- / women product category -->
+									<!-- start sports product category -->
+									<div class="tab-pane fade" id="sports">
+										<ul class="aa-product-catg">
+											<jsp:include page="Item.jspx" >
+											<!-- params go here -->
+												<jsp:param name="name" value="name" />												
+												<jsp:param name="number" value="number" />												
+												<jsp:param name="quantity" value="quantity" />
+												<jsp:param name="price" value="price" />
+											</jsp:include>
+										</ul>
+									</div>
+									<!-- / sports product category -->
+									<!-- start electronic product category -->
+									<div class="tab-pane fade" id="electronics">
+										<ul class="aa-product-catg">
+											<jsp:include page="Item.jspx" >
+											<!-- params go here -->
+												<jsp:param name="name" value="name" />												
+												<jsp:param name="number" value="number" />												
+												<jsp:param name="quantity" value="quantity" />
+												<jsp:param name="price" value="price" />
+											</jsp:include>
+										</ul>
+									</div>
+									<!-- / electronic product category -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- / Products section -->
 </jsp:root>
