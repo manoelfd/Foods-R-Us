@@ -57,6 +57,7 @@ public class ShoppingCartAnalysis implements HttpSessionAttributeListener, HttpS
      * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
      */
     public void attributeReplaced(HttpSessionBindingEvent se)  { 
+    	if(se.getName().equals("shoppingCart")){
 		HttpSession session = se.getSession();
 		ServletContext sc= session.getServletContext();
 
@@ -69,4 +70,5 @@ public class ShoppingCartAnalysis implements HttpSessionAttributeListener, HttpS
 		long averageTime = ((long)sc.getAttribute("averageTimeUntilCart") + totalTime)/2;
 		sc.setAttribute("averageTimeUntilCart", averageTime);
 		}
+    }
 }

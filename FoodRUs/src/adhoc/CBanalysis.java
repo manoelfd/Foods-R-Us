@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 					, 
 		description = "Check average time until checkout", 
 		urlPatterns = { 
-				"/Controller", 
+				"/Main", 
 				"/Checkout"
 		})
 public class CBanalysis implements Filter {
