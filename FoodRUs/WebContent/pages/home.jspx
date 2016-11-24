@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="false"/>
+<![CDATA[<!DOCTYPE html>]]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <jsp:include page="../include/Header.jspx"/>
+  <body> 
+   <!-- wpf loader Two -->
+    <div id="wpf-loader-two">          
+      <div class="wpf-loader-two-inner">
+        <span>Loading</span>
+      </div>
+    </div> 
+    <jsp:include page="../include/HeaderBar.jspx"/>
+    <!-- / wpf loader Two -->       
+  <!-- SCROLL TOP BUTTON -->
+   <!--   <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a> -->
+  <!-- END SCROLL TOP BUTTON -->
+
+
+
+  <!-- menu -->
+    <!-- menu -->
+  <section id="menu">
+    <div class="container">
+      <div class="menu-area">
+        <!-- Navbar -->
+        <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>          
+          </div>
+          <div class="navbar-collapse collapse">
+            <!-- Left nav -->
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">Home</a></li>
+     
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div> 
+      </div>
+
+	</section>
+  <!-- / menu -->  
+<jsp:include page="../include/Catalog.jspx"/>
+<jsp:include page="../include/Footer.jspx"/>
+</body>
+</html>
+</jsp:root>

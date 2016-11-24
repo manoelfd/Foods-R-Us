@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<!-- start single product item -->
+	<!-- requires name, number, quantity/unit, price -->
+	<li>
+		<figure>
+			<a class="aa-product-img" href="#"><img
+				src="${pageContext.request.contextPath}/img/man/polo-shirt-2.png" alt="polo shirt img"></a>
+			<a class="aa-add-card-btn" href="#"><span
+				class="fa fa-shopping-cart"></span>Add To Cart</a>
+			<figcaption>
+				<h4 class="aa-product-title">
+					<a href="#">${param.name}</a>
+				</h4>
+				<span class="aa-product-price">$${param.price} ${param.quantity}</span>
+			</figcaption>
+		</figure>
+		<div class="aa-product-hvr-content">
+<!-- 			<a href="#" data-toggle="tooltip" data-placement="top" -->
+<!-- 				title="Add to Wishlist"><span class="fa fa-heart-o"></span></a> <a -->
+<!-- 				href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span -->
+<!-- 				class="fa fa-exchange"></span></a> <a href="#" data-toggle2="tooltip" -->
+<!-- 				data-placement="top" title="Quick View" data-toggle="modal" -->
+<!-- 				data-target="#quick-view-modal"><span class="fa fa-search"></span></a> -->
+		</div> <!-- product badge --> <span class="aa-badge aa-sale" href="#">${param.number}</span>
+	</li>
+</jsp:root>
