@@ -36,7 +36,7 @@ public class CatalogModel
 		}
 		return categorys;
 	}
-
+// yo
 	public HashMap<Category, List<Item>> getCatalog()
 	{
 		HashMap<Category, List<Item>> catalog = new HashMap<Category, List<Item>>();

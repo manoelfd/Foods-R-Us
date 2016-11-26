@@ -8,6 +8,7 @@
 		omit-xml-declaration="true" />
 	<!-- start single product item -->
 	<!-- requires name, number, quantity/unit, price -->
+	<!--  yo -->
 	<li>
 		<figure>
 			<a class="aa-product-img" href="#"><img

@@ -12,7 +12,7 @@
 	<div class="${param.active eq true ? 'tab-pane fade in active' : 'tab-pane
 		fade'}" id="${param.category}">
 
-
+<!--  yo -->
 		<ul class="aa-product-catg">
 			<!-- start single product item -->
 			<c:forEach items="${param.items}" var="item" varStatus="count">

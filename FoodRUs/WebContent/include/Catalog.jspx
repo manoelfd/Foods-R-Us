@@ -32,6 +32,7 @@
 										</c:choose>
 									</c:forEach>
 								</ul>
+								<!--  yo -->
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<c:forEach items="${catalog}" var="cat" varStatus="count">
