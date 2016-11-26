@@ -55,7 +55,15 @@ public class Main extends HttpServlet
 
 		if (session.getAttribute("shoppingcart") == null)
 		{ // shopping cart doesn't exist
-			session.setAttribute("shoppingcart", new ShoppingCart());
+			try
+			{
+				session.setAttribute("shoppingcart", new ShoppingCart());
+			} catch (Exception e)
+			{
+				// TODO Auto-generated catch block
+				System.out.println("exception in Main new ShoppingCart");
+				System.out.println(e.getMessage());
+			}
 		}
 		this.getServletContext().getRequestDispatcher("/pages/home.jspx").forward(request, response);
 	}
