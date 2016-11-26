@@ -9,14 +9,16 @@
 		omit-xml-declaration="true" />
 	<!-- Inputs: active, list<items>, category -->
 	<!-- Start men product category -->
-	<div class="${param.active eq true ? 'tab-pane fade in active' : 'tab-pane
-		fade'}" id="${param.category}">
+	<div
+		class="${param.active ? 'tab-pane fade in active' : 'tab-pane
+		fade'}"
+		id="${param.categoryID}">
 
-<!--  yo -->
+		<!--  yo -->
 		<ul class="aa-product-catg">
 			<!-- start single product item -->
-			<c:forEach items="${param.items}" var="item" varStatus="count">
-	 			<jsp:include page="Item.jspx">
+			<c:forEach items="${items}" var="item" varStatus="count">
+				<jsp:include page="Item.jspx">
 					<!-- params go here -->
 					<jsp:param name="name" value="${item.name}" />
 					<jsp:param name="number" value="${item.number}" />
@@ -25,8 +27,6 @@
 				</jsp:include>
 			</c:forEach>
 		</ul>
-		<a class="aa-browse-btn" href="#">Browse all Product <span
-			class="fa fa-long-arrow-right"></span></a>
 	</div>
 	<!-- / men product category -->
 </jsp:root>

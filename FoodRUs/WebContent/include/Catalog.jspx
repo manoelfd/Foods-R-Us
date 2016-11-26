@@ -17,17 +17,17 @@
 							<div class="aa-product-inner">
 								<!-- start prduct navigation -->
 								<!-- here we'd iterate through all categorys and create a tab for them -->
-
+<!-- hi -->
 								<ul class="nav nav-tabs aa-products-tab">
 									<!-- create tabs for each category -->
-									<c:forEach items="${catalog}" var="catalog" varStatus="count">
+									<c:forEach items="${catalog}" var="cat" varStatus="count">
 										<c:choose>
-											<c:when test="${count.count eq 0}">
-												<li class="active"><a href="#${catalog.key.name}"
-													data-toggle="tab">${catalog.key.name}</a></li>
+											<c:when test="${count.count eq 1}">
+												<li class="active"><a href="#${cat.key.name}"
+													data-toggle="tab">${cat.key.name}</a></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="#${catalog.key.name}" data-toggle="tab">${catalog.key.name}</a></li>
+												<li><a href="#${cat.key.id}" data-toggle="tab">${cat.key.name}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -36,13 +36,13 @@
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<c:forEach items="${catalog}" var="cat" varStatus="count">
+										<c:set var="items" value="${cat.value}" scope="request" />
 										<jsp:include page="Category.jspx">
-											<!-- params go here -->
-											<jsp:param name="active" value="${count.count eq 0}" />
-											<jsp:param name="category" value="${cat.key.name}" />
-											<jsp:param name="items" value="${cat.value}" />
+											<jsp:param name="categoryID" value="${cat.key.id}" />
+											<jsp:param name="active" value="${count.count eq 1}" />
 										</jsp:include>
 									</c:forEach>
+
 								</div>
 							</div>
 						</div>
