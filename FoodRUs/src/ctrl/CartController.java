@@ -50,7 +50,9 @@ public class CartController extends HttpServlet {
 		HttpSession sn = request.getSession();
 		ShoppingCart shopCart = (ShoppingCart) this.getServletContext().getAttribute("shoppingCart");
 		
+
 		this.getServletContext().getRequestDispatcher("/cart.jspx").forward(request, response);
+		
 	}
 
 	/**
