@@ -20,126 +20,126 @@ import beans.Item;
 public class CategoryDAO
 {
 	// *** constants used by this DAO
-		public static final String SELECT_CATEGORY_BY_ID = "select * from roumani.category where id = ?";
-		public static final String SELECT_ALL_CATEGORIES = "select * from roumani.category";
-		public static final String SELECT_CATEGORY_BY_NAME = "select * from roumani.category where NAME = ?";
+	public static final String SELECT_CATEGORY_BY_ID = "select * from roumani.category where id = ?";
+	public static final String SELECT_ALL_CATEGORIES = "select * from roumani.category";
+	public static final String SELECT_CATEGORY_BY_NAME = "select * from roumani.category where NAME = ?";
 
-		private DataSource dataSource;
-		
-		/**
-		 * Default Constructor
-		 * @throws NamingException
-		 */
-		public CategoryDAO() throws NamingException {
-			this.dataSource = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
-		}
+	private DataSource dataSource;
 
-		
-		public Category getCategoryByID(int ID) throws SQLException {
-			Connection connection = this.dataSource.getConnection();
-			PreparedStatement statement = null;
-			
-			Category category = null;
-			
-			try{
-				statement = connection.prepareStatement(this.SELECT_CATEGORY_BY_ID);
-				statement.setInt(1, ID);
-				ResultSet rs = statement.executeQuery();
-				
-				if(rs.next()) {
-					category = this.createCategory(rs);
-				}
-			}
-			catch (Exception e)
-			{
-				System.out.println("exception in CategoryDAO getCategoryById");
-				System.out.println(e.getMessage());
-			}
-			finally 
-			{
-				if(statement != null) 
-				{ 
-					statement.close(); 
-				}
-			}
-			return category;
-		}
-		
-		public Category getCategoryByName(String name) throws SQLException {
-			Connection connection = this.dataSource.getConnection();
-			PreparedStatement statement = null;
-			
-			Category category = null;
-			
-			try{
-				statement = connection.prepareStatement(this.SELECT_CATEGORY_BY_NAME);
-				statement.setString(1, name);;
-				ResultSet rs = statement.executeQuery();
-				
-				if(rs.next()) {
-					category = this.createCategory(rs);
-				}
-			}
-			catch (Exception e)
-			{
-				System.out.println("exception in CategoryDAO getCategoryById");
-				System.out.println(e.getMessage());
-			}
-			finally 
-			{
-				if(statement != null) 
-				{ 
-					statement.close(); 
-				}
-			}
-			return category;
-		}
-		
+	/**
+	 * Default Constructor
+	 * 
+	 * @throws NamingException
+	 */
+	public CategoryDAO() throws NamingException
+	{
+		this.dataSource = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/EECS");
+	}
 
-		public List<Category> getAllCategory() throws SQLException {
-			Connection connection = this.dataSource.getConnection();
-			PreparedStatement statement = null;
-			Item item = null;
-			List<Category> list = new LinkedList<Category>();
-			
-			try{
-				statement = connection.prepareStatement(this.SELECT_ALL_CATEGORIES);
-				ResultSet rs = statement.executeQuery();
-				
-				while (rs.next()) {
-					String ID = rs.getString("ID");
-					int categoryID = Integer.parseInt(ID);
-					Category category = this.createCategory(rs);
-					list.add(category);
-				}
-			}
-			catch (Exception e)
+	public Category getCategoryByID(int ID) throws SQLException
+	{
+		Connection connection = this.dataSource.getConnection();
+		PreparedStatement statement = null;
+
+		Category category = null;
+
+		try
+		{
+			statement = connection.prepareStatement(SELECT_CATEGORY_BY_ID);
+			statement.setInt(1, ID);
+			ResultSet rs = statement.executeQuery();
+
+			if (rs.next())
 			{
-				System.out.println("exception in CategoryDAO getAllCategory");
-				System.out.println(e.getMessage());
+				category = this.createCategory(rs);
 			}
-			finally 
+		} catch (Exception e)
+		{
+			System.out.println("exception in CategoryDAO getCategoryById");
+			System.out.println(e.getMessage());
+		} finally
+		{
+
+			statement.close();
+			connection.close();
+		}
+		return category;
+	}
+
+	public Category getCategoryByName(String name) throws SQLException
+	{
+		Connection connection = this.dataSource.getConnection();
+		PreparedStatement statement = null;
+
+		Category category = null;
+
+		try
+		{
+			statement = connection.prepareStatement(CategoryDAO.SELECT_CATEGORY_BY_NAME);
+			statement.setString(1, name);
+			;
+			ResultSet rs = statement.executeQuery();
+
+			if (rs.next())
 			{
-				if(statement != null) 
-				{ 
-					statement.close(); 
-				}
+				category = this.createCategory(rs);
 			}
-			//System.out.print(item.toString());
-			return list;
+		} catch (Exception e)
+		{
+			System.out.println("exception in CategoryDAO getCategoryById");
+			System.out.println(e.getMessage());
+		} finally
+		{
+			statement.close();
+			connection.close();
 		}
-		
-		private Category createCategory(ResultSet resultSet) throws SQLException {
-			Category category = new Category();
-			category.setDescription(resultSet.getString("Description"));
-			category.setId(resultSet.getInt("Id"));
-			category.setName(resultSet.getString("Name"));
-			// *** since Picture is saved as Blob, it should be 
-			// *** converted to byte[] to decouples model frm 
-			Blob picAsBlob = resultSet.getBlob("Picture");
-			byte[] picAsBytes =  picAsBlob.getBytes(1, (int)picAsBlob.length());
-			category.setPicture(picAsBytes);
-			return category;
+		return category;
+	}
+
+	public List<Category> getAllCategory() throws SQLException
+	{
+		Connection connection = this.dataSource.getConnection();
+		PreparedStatement statement = null;
+		Item item = null;
+		List<Category> list = new LinkedList<Category>();
+
+		try
+		{
+			statement = connection.prepareStatement(CategoryDAO.SELECT_ALL_CATEGORIES);
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next())
+			{
+				String ID = rs.getString("ID");
+				int categoryID = Integer.parseInt(ID);
+				Category category = this.createCategory(rs);
+				list.add(category);
+			}
+		} catch (Exception e)
+		{
+			System.out.println("exception in CategoryDAO getAllCategory");
+			System.out.println(e.getMessage());
+		} finally
+		{
+			statement.close();
+			connection.close();
 		}
+		// System.out.print(item.toString());
+		return list;
+	}
+
+	private Category createCategory(ResultSet resultSet) throws SQLException
+	{
+		Category category = new Category();
+		category.setDescription(resultSet.getString("Description"));
+		category.setId(resultSet.getInt("Id"));
+		category.setName(resultSet.getString("Name"));
+		// *** since Picture is saved as Blob, it should be
+		// *** converted to byte[] to decouples model frm
+		Blob picAsBlob = resultSet.getBlob("Picture");
+		byte[] picAsBytes = picAsBlob.getBytes(1, (int) picAsBlob.length());
+		category.setPicture(picAsBytes);
+		return category;
+	}
 
 }

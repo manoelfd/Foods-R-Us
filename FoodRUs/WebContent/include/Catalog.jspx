@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 	
-		xmlns:c="http://java.sun.com/jsp/jstl/core" 
-		version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 	<jsp:directive.page contentType="text/html; charset=UTF-8"
 		pageEncoding="UTF-8" session="false" />
 	<jsp:output doctype-root-element="html"
@@ -18,42 +17,31 @@
 							<div class="aa-product-inner">
 								<!-- start prduct navigation -->
 								<!-- here we'd iterate through all categorys and create a tab for them -->
+
 								<ul class="nav nav-tabs aa-products-tab">
-								  	<li class="active"><a href="#${categories.get(0).getName()}" data-toggle="tab">${categories.get(0).getName()}</a></li>    
-									<c:forEach var="category" begin="1" items="${categories}">
-  										<li><a href="#${category.getName()}" data-toggle="tab">${category.getName()}</a></li>    
-  									</c:forEach>	
+									<!-- create tabs for each category -->
+									<c:forEach items="${catalog}" var="catalog" varStatus="count">
+										<c:choose>
+											<c:when test="${count.count eq 0}">
+												<li class="active"><a href="#${catalog.key.name}"
+													data-toggle="tab">${catalog.key.name}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="#${catalog.key.name}" data-toggle="tab">${catalog.key.name}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<!-- Default product category -->
-									<div class="tab-pane fade in active" id="${categories.get(0).getName()}">
-										<ul class="aa-product-catg">
-											<jsp:include page="Item.jspx" >
+									<c:forEach items="${catalog}" var="cat" varStatus="count">
+										<jsp:include page="Category.jspx">
 											<!-- params go here -->
-												<jsp:param name="name" value="name" />												
-												<jsp:param name="number" value="number" />												
-												<jsp:param name="quantity" value="quantity" />
-												<jsp:param name="price" value="price" />
-											</jsp:include>
-										</ul>
-									</div>
-									<!-- /Default product category -->
-									<c:forEach var="category" begin="1" items="${categories}">									
-									<!-- start ${category.getName()} product category -->
-									<div class="tab-pane fade" id="${category.getName()}">
-										<ul class="aa-product-catg">
-											<jsp:include page="Item.jspx" >
-											<!-- params go here -->
-												<jsp:param name="name" value="name" />												
-												<jsp:param name="number" value="number" />												
-												<jsp:param name="quantity" value="quantity" />
-												<jsp:param name="price" value="price" />
-											</jsp:include>
-										</ul>
-									</div>
-									<!-- / ${category.getName()} product category -->
-									</c:forEach>	
+											<jsp:param name="active" value="${count.count eq 0}" />
+											<jsp:param name="category" value="${cat.key.name}" />
+											<jsp:param name="items" value="${cat.value}" />
+										</jsp:include>
+									</c:forEach>
 								</div>
 							</div>
 						</div>

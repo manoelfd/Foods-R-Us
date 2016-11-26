@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -41,12 +38,12 @@ public class ItemDAO
 		Item item = null;
 		
 		try{
-			statement = connection.prepareStatement(this.SELECT_ITEM_BY_ID);
+			statement = connection.prepareStatement(ItemDAO.SELECT_ITEM_BY_ID);
 			statement.setInt(1, ID);
 			ResultSet rs = statement.executeQuery();
 			
 			if(rs.next()) {
-				item = this.createItem(rs, ID);
+				item = this.createItem(rs);
 			}
 		}
 		catch (Exception e)
@@ -56,10 +53,8 @@ public class ItemDAO
 		}
 		finally 
 		{
-			if(statement != null) 
-			{ 
-				statement.close(); 
-			}
+			statement.close();
+			connection.close();
 		}
 		//System.out.print(item.toString());
 		return item;
@@ -73,13 +68,11 @@ public class ItemDAO
 		List<Item> list = new LinkedList<Item>();
 		
 		try{
-			statement = connection.prepareStatement(this.SELECT_ALL_ITEMS);
+			statement = connection.prepareStatement(SELECT_ALL_ITEMS);
 			ResultSet rs = statement.executeQuery();
 			
 			while (rs.next()) {
-				String number = rs.getString("NUMBER");
-				int ID = Integer.parseInt(number);
-				item = this.createItem(rs, ID);
+				item = this.createItem(rs);
 				list.add(item);
 			}
 		}
@@ -90,10 +83,8 @@ public class ItemDAO
 		}
 		finally 
 		{
-			if(statement != null) 
-			{ 
-				statement.close(); 
-			}
+			statement.close();
+			connection.close();
 		}
 		//System.out.print(item.toString());
 		return list;
@@ -106,14 +97,12 @@ public class ItemDAO
 		List<Item> list = new LinkedList<Item>();
 		
 		try{
-			statement = connection.prepareStatement(this.SELECT_ITEMS_WITH_KYEWORD);
+			statement = connection.prepareStatement(ItemDAO.SELECT_ITEMS_WITH_KYEWORD);
 			statement.setString(1, keyword);
 			ResultSet rs = statement.executeQuery();
 			
 			while (rs.next()) {
-				String number = rs.getString("NUMBER");
-				int ID = Integer.parseInt(number);
-				item = this.createItem(rs, ID);
+				item = this.createItem(rs);
 				list.add(item);
 			}
 		}
@@ -124,31 +113,29 @@ public class ItemDAO
 		}
 		finally 
 		{
-			if(statement != null) 
-			{ 
-				statement.close(); 
-			}
+			statement.close();
+			connection.close();
 		}
 		//System.out.print(item.toString());
 		return list;
 	}
 	
-	public List<Item> getItemsByCategory(String catID) throws SQLException {
+	public List<Item> getItemsByCategory(int catID) throws SQLException {
 		Connection connection = this.dataSource.getConnection();
 		PreparedStatement statement = null;
 		Item item = null;
 		List<Item> list = new LinkedList<Item>();
 		
 		try{
-			statement = connection.prepareStatement(this.SELECT_ITEMS_BY_CATEG_ID);
+			statement = connection.prepareStatement(ItemDAO.SELECT_ITEMS_BY_CATEG_ID);
+			statement.setInt(1, catID);
 			ResultSet rs = statement.executeQuery();
 			
 			while (rs.next()) {
-				String number = rs.getString("NUMBER");
-				int ID = Integer.parseInt(number);
-				item = this.createItem(rs, ID);
+				item = this.createItem(rs);
 				list.add(item);
 			}
+			System.out.println("done");
 		}
 		catch (Exception e)
 		{
@@ -157,17 +144,15 @@ public class ItemDAO
 		}
 		finally 
 		{
-			if(statement != null) 
-			{ 
-				statement.close(); 
-			}
+			statement.close();
+			connection.close();
 		}
 		//System.out.print(item.toString());
 		return list;
 	}
 	
 	
-	private Item createItem(ResultSet resultSet, int rowNumber) throws SQLException {
+	private Item createItem(ResultSet resultSet) throws SQLException {
 		Item item = new Item();
 		item.setCatId(resultSet.getInt("CatId"));
 		item.setCostPrice(resultSet.getDouble("CostPrice"));
@@ -179,6 +164,7 @@ public class ItemDAO
 		item.setReOrder(resultSet.getInt("reOrder"));
 		item.setSupId(resultSet.getInt("supId"));
 		item.setUnit(resultSet.getString("unit"));
+		System.out.println(item.toString());
 		return item;
 	}
 

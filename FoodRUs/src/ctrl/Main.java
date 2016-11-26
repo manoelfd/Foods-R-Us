@@ -36,11 +36,11 @@ public class Main extends HttpServlet
 		try
 		{
 			catalogModel = new CatalogModel();
-		} catch (NamingException e)
+		} catch (Exception e)
 		{
-			System.out.println("Model could not be iniciated");
+			System.out.println("Model could not be initiated");
 			e.printStackTrace();
-			throw new ServletException(e);
+			throw new ServletException(e.getMessage());
 		}
 		getServletContext().setAttribute("catalogModel", catalogModel);
 	}
@@ -90,6 +90,6 @@ public class Main extends HttpServlet
 
 	protected void initiateCatalog(HttpServletRequest request){
 		CatalogModel cataModel = (CatalogModel) getServletContext().getAttribute("catalogModel");
-		request.setAttribute("categories", cataModel.getCategories());
+		request.setAttribute("catalog", cataModel.getCatalog());
 	}
 }
