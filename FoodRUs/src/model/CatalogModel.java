@@ -1,11 +1,13 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.NamingException;
 
 import beans.Category;
+import beans.Item;
 import daos.CategoryDAO;
 import daos.ItemDAO;
 
@@ -17,6 +19,7 @@ public class CatalogModel
 	public CatalogModel() throws NamingException
 	{
 		categoryDAO = new CategoryDAO();
+		itemDAO = new ItemDAO();
 	}
 
 	public List<Category> getCategories()
@@ -33,4 +36,28 @@ public class CatalogModel
 		}
 		return categorys;
 	}
+// yo
+	public HashMap<Category, List<Item>> getCatalog()
+	{
+		HashMap<Category, List<Item>> catalog = new HashMap<Category, List<Item>>();
+		List<Category> categories = this.getCategories();
+		for (Category category : categories)
+		{
+			try
+			{
+				List<Item> items = this.itemDAO.getItemsByCategory(category.getId());
+				catalog.put(category, items);
+
+			} catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				catalog = null;
+			}
+
+		}
+
+		return catalog;
+	}
+
 }

@@ -31,7 +31,7 @@ public class CartController extends HttpServlet {
 		try
 		{
 			ShoppingCart userCart = new ShoppingCart();
-			this.getServletContext().setAttribute("userCart", userCart);
+			this.getServletContext().setAttribute("shoppingCart", userCart);
 
 		} catch (Exception e)
 		{
