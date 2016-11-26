@@ -2,8 +2,6 @@ package beans;
 
 
 public class Category {
-	// *** serial number
-	//private static final long serialVersionUID = -4527552993807311995L;
 
 	private byte[] picture;
 	private String description;

@@ -40,9 +40,12 @@ public class LogInController extends HttpServlet
 
 		if(request.getParameter("hash") == null && request.getSession().getAttribute("loggedIn") == null)
 		{
-			String authURL= "https://www.eecs.yorku.ca/~cse31020/auth/Auth.cgi";
-			authURL += "?back=" + request.getRequestURL();
-			response.sendRedirect(authURL);	
+			//String authURL= "https://www.eecs.yorku.ca/~cse31020/auth/Auth.cgi";
+			//authURL += "?back=" + request.getRequestURL();
+			//response.sendRedirect(authURL);
+			String me = request.getRequestURL().toString();
+			String oauth = "https://www.eecs.yorku.ca/~cse31020/auth/Auth.cgi?back=";
+			response.sendRedirect(oauth + me);
 		}
 		else{
 			
