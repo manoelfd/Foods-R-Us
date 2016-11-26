@@ -1,6 +1,8 @@
 package ctrl;
 
 import java.io.IOException;
+
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CatalogModel;
 import model.ShoppingCart;
 
 /**
@@ -26,6 +29,22 @@ public class Main extends HttpServlet
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void init() throws ServletException
+	{
+		CatalogModel catalogModel;
+		try
+		{
+			catalogModel = new CatalogModel();
+		} catch (NamingException e)
+		{
+			System.out.println("Model could not be iniciated");
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+		getServletContext().setAttribute("catalogModel", catalogModel);
+	}
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -57,7 +76,12 @@ public class Main extends HttpServlet
 		{ // shopping cart doesn't exist
 			session.setAttribute("shoppingcart", new ShoppingCart());
 		}
+		initiateCatalog(request);
 		this.getServletContext().getRequestDispatcher("/pages/home.jspx").forward(request, response);
 	}
 
+	protected void initiateCatalog(HttpServletRequest request){
+		CatalogModel cataModel = (CatalogModel) getServletContext().getAttribute("catalogModel");
+		request.setAttribute("categories", cataModel.getCategories());
+	}
 }
