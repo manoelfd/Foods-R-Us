@@ -54,7 +54,7 @@ public class CBanalysis implements Filter {
 		HttpSession session = request.getSession();
 		String url = request.getServletPath();
 
-		if(url.equals("/Contoller")&&session.getAttribute("startTime")==null){
+		if(url.equals("/Main")&&session.getAttribute("startTime")==null){
 			long startTime = System.nanoTime();
 			session.setAttribute("startTime", startTime);
 			chain.doFilter(request, response);
@@ -70,7 +70,7 @@ public class CBanalysis implements Filter {
 			long averageTime = ((long)sc.getAttribute("averageTimeToCheckout") + totalTime)/2;
 			sc.setAttribute("averageTimeToCheckout", averageTime);
 		}
-		System.out.println("Time analysis happening");
+		//System.out.println("Time analysis happening");
 		}
 
 	/**
