@@ -17,7 +17,7 @@
 							<div class="aa-product-inner">
 								<!-- start prduct navigation -->
 								<!-- here we'd iterate through all categorys and create a tab for them -->
-
+<!-- hi -->
 								<ul class="nav nav-tabs aa-products-tab">
 									<!-- create tabs for each category -->
 									<c:forEach items="${catalog}" var="cat" varStatus="count">
