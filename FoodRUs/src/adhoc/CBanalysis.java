@@ -69,6 +69,8 @@ public class CBanalysis implements Filter {
 			}
 			long averageTime = ((long)sc.getAttribute("averageTimeToCheckout") + totalTime)/2;
 			sc.setAttribute("averageTimeToCheckout", averageTime);
+		} else {
+			chain.doFilter(request, response);
 		}
 		//System.out.println("Time analysis happening");
 		}
