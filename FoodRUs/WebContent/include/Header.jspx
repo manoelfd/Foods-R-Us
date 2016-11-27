@@ -51,6 +51,10 @@
   <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/slick.js"><jsp:text /></script>
   <!-- Price picker slider -->
   <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/nouislider.js"><jsp:text /></script>
+   
+  <!-- FoodRUs -->
+  <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/foodRUs.js"><jsp:text /></script>
+  
   <!-- Custom js -->
   <script src="${pageContext.request.contextPath}/res/js/custom.js"><jsp:text /></script> 
     

@@ -84,6 +84,7 @@ public class Main extends HttpServlet
 				System.out.println(e.getMessage());
 			}
 		}
+		request.setAttribute("target", "Catalog.jspx");
 		initiateCatalog(request);
 		this.getServletContext().getRequestDispatcher("/pages/home.jspx").forward(request, response);
 	}

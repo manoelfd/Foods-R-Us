@@ -59,7 +59,6 @@ public class CBanalysis implements Filter {
 			session.setAttribute("startTime", startTime);
 			chain.doFilter(request, response);
 		} else if (url.equals("/Checkout.jspx")){
-			
 			chain.doFilter(request, response);
 			ServletContext sc= session.getServletContext();
 			long endTime = System.nanoTime();

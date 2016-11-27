@@ -38,14 +38,29 @@ public class LogInController extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 
+		String target = request.getParameter("target");
+		
 		if(request.getParameter("hash") == null && request.getSession().getAttribute("loggedIn") == null)
 		{
+<<<<<<< HEAD
 			String authURL= "https://www.eecs.yorku.ca/~cse31020/auth/Auth.cgi";
 			authURL += "?back=" + request.getRequestURL();
 			response.sendRedirect(authURL);	
+=======
+			//String authURL= "https://www.eecs.yorku.ca/~cse31020/auth/Auth.cgi";
+			//authURL += "?back=" + request.getRequestURL();
+			//response.sendRedirect(authURL);
+			String me = request.getRequestURL().toString();
+			String oauth = "https://www.eecs.yorku.ca/~cse31020/auth/AuthProject.cgi?back=";
+			response.sendRedirect(oauth + me);
+>>>>>>> branch 'master' of ssh://git@github.com/manoelfd/Foods-R-Us.git
 		}
 		else{
+<<<<<<< HEAD
 			String page = "auth.jspx";
+=======
+
+>>>>>>> branch 'master' of ssh://git@github.com/manoelfd/Foods-R-Us.git
 			if(request.getSession().getAttribute("loggedIn") == null){
 				request.getSession().setAttribute("hash", request.getParameter("hash"));// for further verification
 				
@@ -57,11 +72,11 @@ public class LogInController extends HttpServlet
 			
 			if(request.getParameter("signout") != null && request.getParameter("signout").equals("Sign Out")){
 				request.getSession().removeAttribute("loggedIn");
-				page = "index.html";// or logout page
+				//page = "page/home.jspx";// or logout page
 			}
 			//request.setAttribute("target", "AuthUser.jspx");
 			
-			this.getServletContext().getRequestDispatcher("/" + page).forward(request, response);
+			this.getServletContext().getRequestDispatcher("/pages/home.jspx").forward(request, response);
 		}
 
 	}

@@ -53,11 +53,11 @@
   <!-- / menu -->
 
 	<c:choose>
-		<c:when test="${empty targetPage}">
+		<c:when test="${empty target}">
 			<jsp:include page="../include/Catalog.jspx" />
 		</c:when>
 		<c:otherwise>
-			<jsp:include page="../include/${targetPage}" />
+			<jsp:include page="../include/${target}" />
 		</c:otherwise>
 	</c:choose>
 	<jsp:include page="../include/Footer.jspx" />
