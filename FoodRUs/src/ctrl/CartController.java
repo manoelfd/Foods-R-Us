@@ -13,7 +13,7 @@ import model.ShoppingCart;
 /**
  * Servlet implementation class CartController
  */
-@WebServlet(urlPatterns ={"/CartController", "/Add"})
+@WebServlet(urlPatterns ={"/CartController", "/Add", "/cart"})
 public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
