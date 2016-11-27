@@ -18,6 +18,9 @@ public class ShoppingCart
 		this.shoppingCart = new HashMap<>();
 	}
 	
+	public int getNumberOfItems() {
+		return this.shoppingCart.size();
+	}
 	public double computeSubTotal(){
 		double subTotal = 0.0;
 		

@@ -76,7 +76,8 @@ public class Main extends HttpServlet
 		{ // shopping cart doesn't exist
 			try
 			{
-				session.setAttribute("shoppingcart", new ShoppingCart());
+				request.getSession().setAttribute("shoppingcart", new ShoppingCart());
+				System.out.println("Created a shopping cart!");
 			} catch (Exception e)
 			{
 				// TODO Auto-generated catch block

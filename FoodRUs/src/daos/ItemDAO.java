@@ -164,7 +164,7 @@ public class ItemDAO
 		item.setReOrder(resultSet.getInt("reOrder"));
 		item.setSupId(resultSet.getInt("supId"));
 		item.setUnit(resultSet.getString("unit"));
-		System.out.println(item.toString());
+		//System.out.println(item.toString());
 		return item;
 	}
 

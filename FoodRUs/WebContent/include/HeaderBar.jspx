@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=UTF-8" 
-		pageEncoding="UTF-8" session="false"/>
-	<jsp:output doctype-root-element="html"
-		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
-		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-		omit-xml-declaration="true" />
+
 
   <!-- Start header section -->
   <header id="aa-header">
@@ -63,7 +58,7 @@
                 <a class="aa-cart-link" href="cart.jspx">
                   <span class="fa fa-shopping-basket"></span>
                   <span class="aa-cart-title">SHOPPING CART</span>
-                  <span class="aa-cart-notify">10</span>
+                  <span class="aa-cart-notify">${sessionScope.shoppingcart.numberOfItems}</span>
                 </a>
                 <div class="aa-cartbox-summary">
                   <ul>

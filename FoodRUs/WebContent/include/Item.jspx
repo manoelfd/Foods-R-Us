@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=UTF-8"
-		pageEncoding="UTF-8" session="false" />
-	<jsp:output doctype-root-element="html"
-		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
-		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-		omit-xml-declaration="true" />
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 	<!-- start single product item -->
 	<!-- requires name, number, quantity/unit, price -->
 	<!--  yo -->
@@ -19,7 +14,11 @@
 				<h4 class="aa-product-title">
 					<a href="#">${param.name}</a>
 				</h4>
-				<span class="aa-product-price">$${param.price} ${param.quantity}</span>
+				<span class="aa-product-price">$<f:formatNumber
+						groupingUsed="true" maxFractionDigits="2" minFractionDigits="2"
+						minIntegerDigits="1">${param.price}</f:formatNumber>
+					${param.quantity}
+				</span>
 			</figcaption>
 		</figure>
 		<div class="aa-product-hvr-content">

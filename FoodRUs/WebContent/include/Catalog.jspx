@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=UTF-8"
-		pageEncoding="UTF-8" session="false" />
-	<jsp:output doctype-root-element="html"
-		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
-		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-		omit-xml-declaration="true" />
 	<!-- Products section -->
 	<section id="aa-product">
 		<div class="container">
@@ -17,17 +11,17 @@
 							<div class="aa-product-inner">
 								<!-- start prduct navigation -->
 								<!-- here we'd iterate through all categorys and create a tab for them -->
-<!-- hi -->
+								<!-- hi -->
 								<ul class="nav nav-tabs aa-products-tab">
 									<!-- create tabs for each category -->
 									<c:forEach items="${catalog}" var="cat" varStatus="count">
 										<c:choose>
 											<c:when test="${count.count eq 1}">
-												<li class="active"><a href="#${cat.key.name}"
+												<li class="active"><a href="#cat${cat.key.id}"
 													data-toggle="tab">${cat.key.name}</a></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="#${cat.key.id}" data-toggle="tab">${cat.key.name}</a></li>
+												<li><a href="#cat${cat.key.id}" data-toggle="tab">${cat.key.name}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -37,7 +31,10 @@
 								<div class="tab-content">
 									<c:forEach items="${catalog}" var="cat" varStatus="count">
 										<c:set var="items" value="${cat.value}" scope="request" />
+										<!-- start single product item -->
 										<jsp:include page="Category.jspx">
+											<!-- params go here -->
+											<jsp:param name="categoryName" value="${cat.key.name}" />
 											<jsp:param name="categoryID" value="${cat.key.id}" />
 											<jsp:param name="active" value="${count.count eq 1}" />
 										</jsp:include>
