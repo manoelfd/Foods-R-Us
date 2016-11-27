@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="true" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+
+
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<jsp:include page="../include/Header.jspx" />
+<body>
+	<!-- wpf loader Two -->
+	<div id="wpf-loader-two">
+		<div class="wpf-loader-two-inner">
+			<span>Loading</span>
+		</div>
+	</div>
+	<jsp:include page="../include/HeaderBar.jspx" />
+	<!-- / wpf loader Two -->
+	<!-- SCROLL TOP BUTTON -->
+	<!--   <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a> -->
+	<!-- END SCROLL TOP BUTTON -->
+
+
+
+	<!-- menu -->
+	<!-- menu -->
+	<section id="menu">
+		<div class="container">
+			<div class="menu-area">
+				<!-- Navbar -->
+				<div class="navbar navbar-default" role="navigation">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="navbar-collapse collapse">
+						<!-- Left nav -->
+						<ul class="nav navbar-nav">
+							<li><a href="index.html">Home</a></li>
+
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<!-- / menu -->
+	
+	<c:if test="${not empty notFound}">
+	<br /><br />
+	<p>${notFound }. <br />Please try a different keyword.</p>
+	<br />
+	<br />
+	</c:if>
+		
+	<ul class="aa-product-catg">
+			<!-- start single product item -->
+			<c:forEach items="${searchResult}" var="item" varStatus="count">
+				<jsp:include page="Item.jspx">
+					<!-- params go here -->
+					<jsp:param name="name" value="${item.name}" />
+					<jsp:param name="number" value="${item.number}" />
+					<jsp:param name="quantity" value="${item.qty}" />
+					<jsp:param name="price" value="${item.price}" />
+				</jsp:include>
+			</c:forEach>
+		</ul>
+	
+	<jsp:include page="../include/Footer.jspx" />
+</body>
+	</html>
+</jsp:root>
