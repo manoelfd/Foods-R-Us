@@ -50,15 +50,10 @@ public class CartController extends HttpServlet {
 		HttpSession sn = request.getSession();
 		ShoppingCart shopCart = (ShoppingCart) this.getServletContext().getAttribute("shoppingCart");
 		
-<<<<<<< HEAD
-
-		this.getServletContext().getRequestDispatcher("/cart.jspx").forward(request, response);
 		
-=======
 		request.setAttribute("target", "pages/cart.jspx");
 		
 		this.getServletContext().getRequestDispatcher("/pages/cart.jspx").forward(request, response);
->>>>>>> branch 'master' of ssh://git@github.com/manoelfd/Foods-R-Us.git
 	}
 
 	/**
