@@ -98,7 +98,7 @@ public class ItemDAO
 		
 		try{
 			statement = connection.prepareStatement(ItemDAO.SELECT_ITEMS_WITH_KYEWORD);
-			statement.setString(1, keyword);
+			statement.setString(1, "%"+keyword+"%");
 			ResultSet rs = statement.executeQuery();
 			
 			while (rs.next()) {
