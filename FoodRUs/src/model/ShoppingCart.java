@@ -24,7 +24,7 @@ public class ShoppingCart
 	public double computeSubTotal(){
 		double subTotal = 0.0;
 		
-	    Iterator it = shoppingCart.entrySet().iterator();
+	    Iterator<?> it = shoppingCart.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
 	        Item item = (Item) pair.getKey();
@@ -45,13 +45,24 @@ public class ShoppingCart
 	 * add one item in the cart
 	 */
     public void addItem(Item itemToAdd){
-    	if(shoppingCart.containsKey(itemToAdd)) {
-    		int quantity = shoppingCart.get(itemToAdd);
-    		quantity ++;
-    		shoppingCart.put(itemToAdd, quantity);
-    	}
-    	else {
+    	int added = 0;
+    	if(shoppingCart.isEmpty()){
     		shoppingCart.put(itemToAdd, 1);
+    	}
+    	else{
+    		for (Item item: this.shoppingCart.keySet()){
+    			if (item.equals(itemToAdd)) {
+    	        	System.out.println("Item exist.");
+            		added = 1;
+            		int quantity = shoppingCart.get(item);
+            		quantity = quantity + 1;
+            		shoppingCart.put(item, quantity);
+    	        }
+    		}
+    		
+    		if(added == 0) {
+    			shoppingCart.put(itemToAdd, 1);
+    		}
     	}
     }
     
@@ -72,7 +83,7 @@ public class ShoppingCart
 	 */
     private void updateQty(Item item, int qty){
     	
-	    Iterator it = shoppingCart.entrySet().iterator();
+	    Iterator<?> it = shoppingCart.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
 	        Item currentItem = (Item) pair.getKey();
@@ -102,4 +113,11 @@ public class ShoppingCart
 		this.shoppingCart = shoppingCart;
 	}
 	
+	public void printCart() 
+	{
+		for (Item item: this.shoppingCart.keySet()){
+			int q = shoppingCart.get(item);
+			System.out.println(item + " " + q);
+		}
+	}
 }
