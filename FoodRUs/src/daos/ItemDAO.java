@@ -31,7 +31,7 @@ public class ItemDAO
 
 	
 	
-	public Item getItemById(int ID) throws SQLException {
+	public Item getItemById(String ID) throws SQLException {
 		Connection connection = this.dataSource.getConnection();
 		PreparedStatement statement = null;
 		
@@ -39,11 +39,12 @@ public class ItemDAO
 		
 		try{
 			statement = connection.prepareStatement(ItemDAO.SELECT_ITEM_BY_ID);
-			statement.setInt(1, ID);
+			statement.setString(1, ID);
 			ResultSet rs = statement.executeQuery();
 			
 			if(rs.next()) {
 				item = this.createItem(rs);
+				//System.out.println("Item: "+item.toString());
 			}
 		}
 		catch (Exception e)
