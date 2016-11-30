@@ -134,7 +134,7 @@ public class Item
 				+ ", costPrice=" + costPrice + ", unit=" + unit + "]";
 	}
 	
-	public int compare(Item secondItem) {
+	public int compareTo(Item secondItem) {
 		return this.getNumber().compareToIgnoreCase(secondItem.getNumber());
 	}
 	
