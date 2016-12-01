@@ -51,7 +51,7 @@ public class ShoppingCart
     	}
     	else{
     		for (Item item: this.shoppingCart.keySet()){
-    			if (item.equals(itemToAdd)) {
+    			if (item.getNumber().equals(itemToAdd.getNumber())) {
     	        	System.out.println("Item exist.");
             		added = 1;
             		int quantity = shoppingCart.get(item);
@@ -88,7 +88,7 @@ public class ShoppingCart
 	        Map.Entry pair = (Map.Entry)it.next();
 	        Item currentItem = (Item) pair.getKey();
 	        
-	        if(currentItem.equals(item)) {
+	        if(currentItem.getNumber().equals(item.getNumber())) {
 		        int quantity = (int) pair.getValue();
 		        quantity += qty;
 		        if(quantity <= 0) {
