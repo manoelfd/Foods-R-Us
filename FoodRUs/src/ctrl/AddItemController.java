@@ -44,11 +44,10 @@ public class AddItemController extends HttpServlet {
 		//request.setAttribute("quantity", qty);
 		String view = "pages/home.jspx";
 		try {
-			String number = request.getParameter("number");
-			System.out.println("Item number: " + number);
-			item  = new ItemDAO().getItemById("2910h074");
-			item2  = new ItemDAO().getItemById("2910h019");
-			item3 = new ItemDAO().getItemById("2910h087");
+			String number = request.getParameter("itemnumber");
+			//System.out.println("Item number: " + number);
+			item  = new ItemDAO().getItemById(number);
+			//System.out.println("AddController Item: " + item);
 
 		} catch (SQLException | NamingException e) {
 			throw new ServletException("Could not get item with item number ["+
@@ -58,16 +57,14 @@ public class AddItemController extends HttpServlet {
 		if (item != null) {
 			ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("shoppingcart");
 			cart.addItem(item);
-			cart.addItem(item2);
-			cart.addItem(item3);
 			
 			Map<Item, Integer> items = cart.getShoppingCart();
 			request.setAttribute("ItemsMap", items);
-			System.out.println("ItemsMap: " + request.getAttribute("ItemsMap"));
+			//System.out.println("ItemsMap: " + request.getAttribute("ItemsMap"));
 			
 			double subtotal = cart.computeSubTotal();
 			request.setAttribute("subtotal", subtotal);
-			System.out.println("Subtotal: " + request.getAttribute("subtotal"));
+			//System.out.println("Subtotal: " + request.getAttribute("subtotal"));
 			cart.printCart();
 			view = "pages/cart.jspx";
 		}
