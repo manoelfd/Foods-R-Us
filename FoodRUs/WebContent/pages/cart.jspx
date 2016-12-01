@@ -84,7 +84,7 @@
                         <td colspan="6" class="aa-cart-view-bottom">
                           <div class="aa-cart-coupon">
                            <!--  <input class="aa-coupon-code" type="text" placeholder="Coupon" /> -->
-                            <input class="aa-cart-view-btn" type="submit" value="Update Cart" />
+                            <input class="aa-cart-view-btn" type="submit" value="Update Cart" href="${pageContext.request.contextPath}/UpdateCartController" />
                           </div>
                           <a class="aa-cart-view-btn" type="submit" value="Continue Shopping" href="${pageContext.request.contextPath}/Main">Continue Shopping</a>
                         </td>
