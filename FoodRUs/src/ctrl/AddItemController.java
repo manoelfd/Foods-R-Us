@@ -65,7 +65,7 @@ public class AddItemController extends HttpServlet {
 			double subtotal = cart.computeSubTotal();
 			request.setAttribute("subtotal", subtotal);
 			//System.out.println("Subtotal: " + request.getAttribute("subtotal"));
-			cart.printCart();
+			//cart.printCart();
 			view = "pages/cart.jspx";
 		}
 		
