@@ -1,68 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=UTF-8" 
-		pageEncoding="UTF-8" session="false"/>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="false" />
 	<jsp:output doctype-root-element="html"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
-<html xmlns="http://www.w3.org/1999/xhtml">
-<jsp:include page="../include/Header.jspx"/>
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<jsp:include page="../include/Header.jspx">
+	<jsp:param value="Cart" name="name" />
+</jsp:include>
 <body>
-<jsp:include page="../include/HeaderBar.jspx"/>
-  <!-- cart header banner section -->
-  <section id="aa-catg-head-banner">
-   <img src="${pageContext.request.contextPath}/res/img/fashion/fashion-header-bg-8.jpg" alt="fashion img" />
-   <div class="aa-catg-head-banner-area">
-     <div class="container">
-      <div class="aa-catg-head-banner-content">
-        <h2>Cart Page</h2>
-        <ol class="breadcrumb">
-          <li><a href="index.html">Home</a></li>                   
-          <li class="active">Cart</li>
-        </ol>
-      </div>
-     </div>
-   </div>
-  </section>
-  <!--  cart header banner section -->
-  <!-- / menu -->  
-  <!-- Cart view section -->
- <section id="cart-view">
-   <div class="container">
-     <div class="row">
-       <div class="col-md-12">
-         <div class="cart-view-area">
-           <div class="cart-view-table">
-             <form action="">
-               <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th></th>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <!-- <th>Total</th> -->
-                      </tr>
-                    </thead>
-                    <tbody>
-                    
-                    <c:forEach items="${ItemsMap}" var="itemPair" varStatus="count">
-						<tr>
-                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                        <td><a href="#"><img src="${pageContext.request.contextPath}/res/img/man/polo-shirt-1.png" alt="img" /></a></td>
-                        <td><a class="aa-cart-title" href="#"><jsp:param name="name" value="${itemPair.key.name}"/>${itemPair.key.name}</a></td>
-                        <td><a class="aa-cart-title" href="#"><jsp:param name="price" value="${itemPair.key.price}"/>${itemPair.key.price}</a></td>
-                        <td><input class="aa-cart-quantity" type="number" name="quantity" value="${itemPair.value}" /></td>
-                      <!--   <td><a class="aa-cart-title" href="#"><jsp:param name="sum" value="${itemPair.value}"/>${itemPair.key.price} * ${itemPair.value}</a></td>
-                      --> 
-                      </tr>
-						<!-- params go here -->
-					</c:forEach>
-                    
-                      <!--
+	<jsp:include page="../include/HeaderBar.jspx" />
+	<!-- cart header banner section -->
+	<section id="aa-catg-head-banner">
+		<img
+			src="${pageContext.request.contextPath}/res/img/fashion/fashion-header-bg-8.jpg"
+			alt="fashion img" />
+		<div class="aa-catg-head-banner-area">
+			<div class="container">
+				<div class="aa-catg-head-banner-content">
+					<h2>Cart Page</h2>
+					<ol class="breadcrumb">
+						<li><a href="index.html">Home</a></li>
+						<li class="active">Cart</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--  cart header banner section -->
+	<!-- / menu -->
+	<!-- Cart view section -->
+	<section id="cart-view">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cart-view-area">
+						<div class="cart-view-table">
+							<form action="">
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th></th>
+												<th></th>
+												<th>Product</th>
+												<th>Price</th>
+												<th>Quantity</th>
+												<!-- <th>Total</th> -->
+											</tr>
+										</thead>
+										<tbody>
+
+											<c:forEach items="${ItemsMap}" var="itemPair"
+												varStatus="count">
+												<tr>
+													<td><a class="remove" href="#"><fa
+																class="fa fa-close"></fa></a></td>
+													<td><a href="#"><img
+															src="${pageContext.request.contextPath}/res/img/man/polo-shirt-1.png"
+															alt="img" /></a></td>
+													<td><a class="aa-cart-title" href="#"><jsp:param
+																name="name" value="${itemPair.key.name}" />${itemPair.key.name}</a></td>
+													<td><a class="aa-cart-title" href="#"><jsp:param
+																name="price" value="${itemPair.key.price}" />${itemPair.key.price}</a></td>
+													<td><input class="aa-cart-quantity" type="number"
+														name="quantity" value="${itemPair.value}" /></td>
+													<!--   <td><a class="aa-cart-title" href="#"><jsp:param name="sum" value="${itemPair.value}"/>${itemPair.key.price} * ${itemPair.value}</a></td>
+                      -->
+												</tr>
+												<!-- params go here -->
+											</c:forEach>
+
+											<!--
                       <tr>
                         <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
                         <td><a href="#"><img src="${pageContext.request.contextPath}/res/img/man/polo-shirt-2.png" alt="img" /></a></td>
@@ -80,44 +92,48 @@
                         <td>$50</td>
                       </tr> 
                       -->
-                      <tr>
-                        <td colspan="6" class="aa-cart-view-bottom">
-                          <div class="aa-cart-coupon">
-                           <!--  <input class="aa-coupon-code" type="text" placeholder="Coupon" /> -->
-                            <input class="aa-cart-view-btn" type="submit" value="Update Cart" href="${pageContext.request.contextPath}/UpdateCartController" />
-                          </div>
-                          <a class="aa-cart-view-btn" type="submit" value="Continue Shopping" href="${pageContext.request.contextPath}/Main">Continue Shopping</a>
-                        </td>
-                      </tr>
-                      </tbody>
-                  </table>
-                </div>
-             </form>
-             <!-- Cart Total view -->
-             <div class="cart-view-total">
-               <h4>Cart Totals</h4>
-               <table class="aa-totals-table">
-                 <tbody>
-                   <tr>
-                     <th>Subtotal</th>
-                     <td>"${subtotal}"</td>
-                   </tr>
-                   <tr>
-                     <th>Total</th>
-                     <td>"${subtotal}"</td>
-                   </tr>
-                 </tbody>
-               </table>
-               <a href="#" class="aa-cart-view-btn">Proceed to Checkout</a>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </section>
- <!-- / Cart view section -->
-<jsp:include page="../include/Footer.jspx"/>
+											<tr>
+												<td colspan="6" class="aa-cart-view-bottom">
+													<div class="aa-cart-coupon">
+														<!--  <input class="aa-coupon-code" type="text" placeholder="Coupon" /> -->
+														<input class="aa-cart-view-btn" type="submit"
+															value="Update Cart"
+															href="${pageContext.request.contextPath}/UpdateCartController" />
+													</div> <a class="aa-cart-view-btn" type="submit"
+													value="Continue Shopping"
+													href="${pageContext.request.contextPath}/Main">Continue
+														Shopping</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</form>
+							<!-- Cart Total view -->
+							<div class="cart-view-total">
+								<h4>Cart Totals</h4>
+								<table class="aa-totals-table">
+									<tbody>
+										<tr>
+											<th>Subtotal</th>
+											<td>"${subtotal}"</td>
+										</tr>
+										<tr>
+											<th>Total</th>
+											<td>"${subtotal}"</td>
+										</tr>
+									</tbody>
+								</table>
+								<a href="#" class="aa-cart-view-btn">Proceed to Checkout</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- / Cart view section -->
+	<jsp:include page="../include/Footer.jspx" />
 </body>
-</html>
+	</html>
 </jsp:root>

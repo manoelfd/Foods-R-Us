@@ -1,72 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />    
-    <title>Foods R Us</title>
-    
-    <!-- Font awesome -->
-    <link href="${pageContext.request.contextPath}/res/css/font-awesome.css" rel="stylesheet" />
-    <!-- Bootstrap -->
-    <link href="${pageContext.request.contextPath}/res/css/bootstrap.css" rel="stylesheet" />   
-    <!-- SmartMenus jQuery Bootstrap Addon CSS -->
-    <link href="${pageContext.request.contextPath}/res/css/jquery.smartmenus.bootstrap.css" rel="stylesheet" />
-    <!-- Product view slider -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/jquery.simpleLens.css" />    
-    <!-- slick slider -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/slick.css" />
-    <!-- price picker slider -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/res/css/nouislider.css" />
-    <!-- Theme color -->
-    <link id="switcher" href="${pageContext.request.contextPath}/res/css/theme-color/dark-red-theme.css" rel="stylesheet" />
-    <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>${not empty param.name?param.name+=' | ':''}Foods R Us</title>
 
-    <!-- Main style sheet -->
-    <link href="${pageContext.request.contextPath}/res/css/style.css" rel="stylesheet" />    
+<!-- Font awesome -->
+<link href="${pageContext.request.contextPath}/res/css/font-awesome.css"
+	rel="stylesheet" />
+<!-- Bootstrap -->
+<link href="${pageContext.request.contextPath}/res/css/bootstrap.css"
+	rel="stylesheet" />
+<!-- SmartMenus jQuery Bootstrap Addon CSS -->
+<link
+	href="${pageContext.request.contextPath}/res/css/jquery.smartmenus.bootstrap.css"
+	rel="stylesheet" />
+<!-- Product view slider -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/res/css/jquery.simpleLens.css" />
+<!-- slick slider -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/res/css/slick.css" />
+<!-- price picker slider -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/res/css/nouislider.css" />
+<!-- Theme color -->
+<link id="switcher"
+	href="${pageContext.request.contextPath}/res/css/theme-color/dark-red-theme.css"
+	rel="stylesheet" />
+<!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
 
-    <!-- Google Font -->
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css' />
-    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
-    
+<!-- Main style sheet -->
+<link href="${pageContext.request.contextPath}/res/css/style.css"
+	rel="stylesheet" />
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<!-- Google Font -->
+<link href='https://fonts.googleapis.com/css?family=Lato'
+	rel='stylesheet' type='text/css' />
+<link href='https://fonts.googleapis.com/css?family=Raleway'
+	rel='stylesheet' type='text/css' />
+
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><jsp:text /></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="${pageContext.request.contextPath}/res/js/bootstrap.js"><jsp:text /></script>  
-  <!-- SmartMenus jQuery plugin -->
-  <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.smartmenus.js"><jsp:text /></script>
-  <!-- SmartMenus jQuery Bootstrap Addon -->
-  <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.smartmenus.bootstrap.js"><jsp:text /></script>  
-  <!-- Product view slider -->
-  <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.simpleGallery.js"><jsp:text /></script>
-  <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/jquery.simpleLens.js"><jsp:text /></script>
-  <!-- slick slider -->
-  <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/slick.js"><jsp:text /></script>
-  <!-- Price picker slider -->
-  <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/nouislider.js"><jsp:text /></script>
-   
-  <!-- FoodRUs -->
-  <script type="text/javascript" src="${pageContext.request.contextPath}/res/js/foodRUs.js"><jsp:text /></script>
-  
-  <!-- Custom js -->
-  <script src="${pageContext.request.contextPath}/res/js/custom.js"><jsp:text /></script> 
-    
-  </head>
-   <!-- wpf loader Two -->
-<!--     <div id="wpf-loader-two">           -->
-<!--       <div class="wpf-loader-two-inner"> -->
-<!--         <span>Loading</span> -->
-<!--       </div> -->
-<!--     </div>  -->
-    <!-- / wpf loader Two -->       
-  <!-- SCROLL TOP BUTTON -->
-<!--     <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a> -->
-  <!-- END SCROLL TOP BUTTON -->
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+	<jsp:text />
+</script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="${pageContext.request.contextPath}/res/js/bootstrap.js">
+	<jsp:text />
+</script>
+<!-- SmartMenus jQuery plugin -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/res/js/jquery.smartmenus.js">
+	<jsp:text />
+</script>
+<!-- SmartMenus jQuery Bootstrap Addon -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/res/js/jquery.smartmenus.bootstrap.js">
+	<jsp:text />
+</script>
+<!-- Product view slider -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/res/js/jquery.simpleGallery.js">
+	<jsp:text />
+</script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/res/js/jquery.simpleLens.js">
+	<jsp:text />
+</script>
+<!-- slick slider -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/res/js/slick.js">
+	<jsp:text />
+</script>
+<!-- Price picker slider -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/res/js/nouislider.js">
+	<jsp:text />
+</script>
+
+<!-- FoodRUs -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/res/js/foodRUs.js">
+	<jsp:text />
+</script>
+
+<!-- Custom js -->
+<script src="${pageContext.request.contextPath}/res/js/custom.js">
+	<jsp:text />
+</script>
+
+	</head>
+	<!-- wpf loader Two -->
+	<!--     <div id="wpf-loader-two">           -->
+	<!--       <div class="wpf-loader-two-inner"> -->
+	<!--         <span>Loading</span> -->
+	<!--       </div> -->
+	<!--     </div>  -->
+	<!-- / wpf loader Two -->
+	<!-- SCROLL TOP BUTTON -->
+	<!--     <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a> -->
+	<!-- END SCROLL TOP BUTTON -->
 </jsp:root>

@@ -16,7 +16,7 @@ import model.ShoppingCart;
 /**
  * Servlet implementation class Main
  */
-@WebServlet("/Main")
+@WebServlet({"/Main"})
 public class Main extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
