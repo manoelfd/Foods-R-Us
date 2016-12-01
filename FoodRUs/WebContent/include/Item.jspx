@@ -8,7 +8,7 @@
 		<figure>
 			<a class="aa-product-img" href="#"><img
 				src="${pageContext.request.contextPath}/res/img/man/polo-shirt-2.png" alt="polo shirt img" /></a>
-			<a class="aa-add-card-btn" href="${pageContext.request.contextPath}/AddItemController"><span
+			<a class="aa-add-card-btn" href="${pageContext.request.contextPath}/AddItemController?itemnumber=${param.number}"><span
 				class="fa fa-shopping-cart"></span>Add To Cart</a>
 			<figcaption>
 				<h4 class="aa-product-title">
@@ -28,6 +28,6 @@
 			<!-- 				class="fa fa-exchange"></span></a> <a href="#" data-toggle2="tooltip" -->
 			<!-- 				data-placement="top" title="Quick View" data-toggle="modal" -->
 			<!-- 				data-target="#quick-view-modal"><span class="fa fa-search"></span></a> -->
-		</div> <!-- product badge --> <span class="aa-badge aa-sale" id="number" value="${param.number}" href="#">${param.number}</span>
+		</div> <!-- product badge --> <span class="aa-badge aa-sale" name="itemnumber" id="itemnumber" value="${param.number}" href="#">${param.number}</span>
 	</li>
 </jsp:root>
