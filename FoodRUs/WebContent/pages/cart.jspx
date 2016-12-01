@@ -44,7 +44,7 @@
                         <th>Product</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Total</th>
+                        <!-- <th>Total</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -62,7 +62,7 @@
 						<!-- params go here -->
 					</c:forEach>
                     
-                      
+                      <!--
                       <tr>
                         <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
                         <td><a href="#"><img src="${pageContext.request.contextPath}/res/img/man/polo-shirt-2.png" alt="img" /></a></td>
@@ -78,12 +78,13 @@
                         <td>$50</td>
                         <td><input class="aa-cart-quantity" type="number" value="1" /></td>
                         <td>$50</td>
-                      </tr>
+                      </tr> 
+                      -->
                       <tr>
                         <td colspan="6" class="aa-cart-view-bottom">
                           <div class="aa-cart-coupon">
-                            <input class="aa-coupon-code" type="text" placeholder="Coupon" />
-                            <input class="aa-cart-view-btn" type="submit" value="Apply Coupon" />
+                           <!--  <input class="aa-coupon-code" type="text" placeholder="Coupon" /> -->
+                            <input class="aa-cart-view-btn" type="submit" value="Update Cart" />
                           </div>
                           <a class="aa-cart-view-btn" type="submit" value="Continue Shopping" href="${pageContext.request.contextPath}/Main">Continue Shopping</a>
                         </td>
