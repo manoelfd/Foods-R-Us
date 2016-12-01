@@ -38,8 +38,7 @@ public class AddItemController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Item item = null;
-		Item item2 = null;
-		Item item3 = null;
+
 		//String qty = request.getParameter("quantity");
 		//request.setAttribute("quantity", qty);
 		String view = "pages/home.jspx";
