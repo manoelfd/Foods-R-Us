@@ -52,17 +52,19 @@ public class AddItemController extends HttpServlet {
 			throw new ServletException("Could not get item with item number ["+
 					request.getParameter("number")+"]", e);
 		} 
-
+		
 		if (item != null) {
+			System.out.println(item.toString());
 			ShoppingCart cart = (ShoppingCart) request.getSession().getAttribute("shoppingcart");
+			System.out.println("Added item to the shopping cart");
 			cart.addItem(item);
 			
-			Map<Item, Integer> items = cart.getShoppingCart();
-			request.setAttribute("ItemsMap", items);
+//			Map<Item, Integer> items = cart.getShoppingCart();
+			//request.setAttribute("ItemsMap", items);
 			//System.out.println("ItemsMap: " + request.getAttribute("ItemsMap"));
 			
-			double subtotal = cart.computeSubTotal();
-			request.setAttribute("subtotal", subtotal);
+//			double subtotal = cart.computeSubTotal();
+			//request.setAttribute("subtotal", subtotal);
 			//System.out.println("Subtotal: " + request.getAttribute("subtotal"));
 			//cart.printCart();
 			view = "pages/cart.jspx";

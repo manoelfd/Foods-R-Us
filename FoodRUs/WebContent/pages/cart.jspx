@@ -2,12 +2,13 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 	<jsp:directive.page contentType="text/html; charset=UTF-8"
-		pageEncoding="UTF-8" session="false" />
+		pageEncoding="UTF-8" session="true" />
 	<jsp:output doctype-root-element="html"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
-	<html xmlns="http://www.w3.org/1999/xhtml">
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsp/jstl/fmt">
 <jsp:include page="../include/Header.jspx">
 	<jsp:param value="Cart" name="name" />
 </jsp:include>
@@ -45,31 +46,35 @@
 										<thead>
 											<tr>
 												<th></th>
-												<th></th>
-												<th>Product</th>
+												<th>Item</th>
+												<th>Item Number</th>
 												<th>Price</th>
 												<th>Quantity</th>
-												<!-- <th>Total</th> -->
+												<th>Extended</th>
 											</tr>
 										</thead>
 										<tbody>
 
-											<c:forEach items="${ItemsMap}" var="itemPair"
-												varStatus="count">
+											<c:forEach
+												items="${sessionScope.shoppingcart.getShoppingCart()}"
+												var="itemPair" varStatus="count">
 												<tr>
 													<td><a class="remove" href="#"><fa
 																class="fa fa-close"></fa></a></td>
-													<td><a href="#"><img
-															src="${pageContext.request.contextPath}/res/img/man/polo-shirt-1.png"
-															alt="img" /></a></td>
+													<td><a class="aa-cart-title" href="#">${itemPair.value.item.name}</a></td>
+													<td><a class="aa-cart-title" href="#">${itemPair.value.item.number}</a></td>
 													<td><a class="aa-cart-title" href="#"><jsp:param
-																name="name" value="${itemPair.key.name}" />${itemPair.key.name}</a></td>
-													<td><a class="aa-cart-title" href="#"><jsp:param
-																name="price" value="${itemPair.key.price}" />${itemPair.key.price}</a></td>
+																name="price" value="${itemPair.value.item.price}" />$<f:formatNumber
+																groupingUsed="true" maxFractionDigits="2"
+																minFractionDigits="2" minIntegerDigits="1">${itemPair.value.item.price}</f:formatNumber></a></td>
 													<td><input class="aa-cart-quantity" type="number"
-														name="quantity" value="${itemPair.value}" /></td>
-													<!--   <td><a class="aa-cart-title" href="#"><jsp:param name="sum" value="${itemPair.value}"/>${itemPair.key.price} * ${itemPair.value}</a></td>
-                      -->
+														name="quantity" value="${itemPair.value.quantity}" /></td>
+													<td><a class="aa-cart-title" href="#"><jsp:param
+																name="sum"
+																value="${itemPair.value.item.getExtendedPrice()}" />$<f:formatNumber
+																groupingUsed="true" maxFractionDigits="2"
+																minFractionDigits="2" minIntegerDigits="1">${itemPair.value.getExtendedPrice()}</f:formatNumber></a></td>
+
 												</tr>
 												<!-- params go here -->
 											</c:forEach>
@@ -116,11 +121,28 @@
 									<tbody>
 										<tr>
 											<th>Subtotal</th>
-											<td>"${subtotal}"</td>
+											<td>$<f:formatNumber groupingUsed="true"
+													maxFractionDigits="2" minFractionDigits="2"
+													minIntegerDigits="1">${sessionScope.shoppingcart.computeSubTotal()}</f:formatNumber></td>
 										</tr>
 										<tr>
-											<th>Total</th>
-											<td>"${subtotal}"</td>
+											<th>Shipping Cost</th>
+											<td>$<f:formatNumber groupingUsed="true"
+													maxFractionDigits="2" minFractionDigits="2"
+													minIntegerDigits="1">${sessionScope.shoppingcart.computeShippingCost()}</f:formatNumber></td>
+										</tr>
+										<tr>
+
+											<th>HST</th>
+											<td>$<f:formatNumber groupingUsed="true"
+													maxFractionDigits="2" minFractionDigits="2"
+													minIntegerDigits="1">${sessionScope.shoppingcart.computeTax()}</f:formatNumber></td>
+										</tr>
+										<tr>
+											<th>Grand Total</th>
+											<td>$<f:formatNumber groupingUsed="true"
+													maxFractionDigits="2" minFractionDigits="2"
+													minIntegerDigits="1">${sessionScope.shoppingcart.computeGrandTotal()}</f:formatNumber></td>
 										</tr>
 									</tbody>
 								</table>
