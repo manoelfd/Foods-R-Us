@@ -33,6 +33,7 @@ public class ShoppingCartItem
 	 */
 	public int getQuantity()
 	{
+
 		return quantity;
 	}
 
@@ -42,6 +43,7 @@ public class ShoppingCartItem
 	 */
 	public void setQuantity(int quantity)
 	{
+		System.out.println("Setting quantity of "+this.item.getNumber()+" to "+quantity);
 		this.quantity = quantity;
 	}
 

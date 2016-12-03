@@ -16,7 +16,8 @@ import model.ShoppingCart;
 /**
  * Servlet implementation class Main
  */
-@WebServlet({"/Main"})
+@WebServlet(
+{ "/Main" })
 public class Main extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +30,7 @@ public class Main extends HttpServlet
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public void init() throws ServletException
 	{
 		CatalogModel catalogModel;
@@ -44,7 +45,6 @@ public class Main extends HttpServlet
 		}
 		getServletContext().setAttribute("catalogModel", catalogModel);
 	}
-
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -67,30 +67,24 @@ public class Main extends HttpServlet
 
 	// have all servlets ovveride this method. This class (main) that servlets
 	// will inherit from will take care of common checks.
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
 	{
 		// check if a shopping cart is set for this user
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("shoppingcart") == null)
 		{ // shopping cart doesn't exist
-			try
-			{
-				request.getSession().setAttribute("shoppingcart", new ShoppingCart());
-				System.out.println("Created a shopping cart!");
-			} catch (Exception e)
-			{
-				// TODO Auto-generated catch block
-				System.out.println("exception in Main new ShoppingCart");
-				System.out.println(e.getMessage());
-			}
+			request.getSession().setAttribute("shoppingcart", new ShoppingCart());
+			System.out.println("Created a shopping cart!");
 		}
 		request.setAttribute("target", "Catalog.jspx");
 		initiateCatalog(request);
 		this.getServletContext().getRequestDispatcher("/pages/home.jspx").forward(request, response);
 	}
 
-	protected void initiateCatalog(HttpServletRequest request){
+	protected void initiateCatalog(HttpServletRequest request)
+	{
 		CatalogModel cataModel = (CatalogModel) getServletContext().getAttribute("catalogModel");
 		request.setAttribute("catalog", cataModel.getCatalog());
 	}

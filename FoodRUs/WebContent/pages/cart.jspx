@@ -40,9 +40,11 @@
 				<div class="col-md-12">
 					<div class="cart-view-area">
 						<div class="cart-view-table">
-							<form action="">
+							<form action="${pageContext.request.contextPath}/CartController"
+								method="POST">
 								<div class="table-responsive">
 									<table class="table">
+
 										<thead>
 											<tr>
 												<th></th>
@@ -59,16 +61,20 @@
 												items="${sessionScope.shoppingcart.getShoppingCart()}"
 												var="itemPair" varStatus="count">
 												<tr>
-													<td><a class="remove" href="#"><fa
+													<td><a class="remove" href="${pageContext.request.contextPath}/CartController/removeItem?itemNumber=${itemPair.value.item.number}"><fa
 																class="fa fa-close"></fa></a></td>
 													<td><a class="aa-cart-title" href="#">${itemPair.value.item.name}</a></td>
+													<input type="hidden" name="Item${count.index}"
+														value="${itemPair.value.item.number}" />
 													<td><a class="aa-cart-title" href="#">${itemPair.value.item.number}</a></td>
 													<td><a class="aa-cart-title" href="#"><jsp:param
 																name="price" value="${itemPair.value.item.price}" />$<f:formatNumber
 																groupingUsed="true" maxFractionDigits="2"
 																minFractionDigits="2" minIntegerDigits="1">${itemPair.value.item.price}</f:formatNumber></a></td>
 													<td><input class="aa-cart-quantity" type="number"
-														name="quantity" value="${itemPair.value.quantity}" /></td>
+														name="Quantity${count.index}" min="0"
+														oninput="validity.valid||(value='');"
+														value="${itemPair.value.quantity}" /></td>
 													<td><a class="aa-cart-title" href="#"><jsp:param
 																name="sum"
 																value="${itemPair.value.item.getExtendedPrice()}" />$<f:formatNumber
@@ -102,8 +108,7 @@
 													<div class="aa-cart-coupon">
 														<!--  <input class="aa-coupon-code" type="text" placeholder="Coupon" /> -->
 														<input class="aa-cart-view-btn" type="submit"
-															value="Update Cart"
-															href="${pageContext.request.contextPath}/UpdateCartController" />
+															name="Update" value="Update Cart" />
 													</div> <a class="aa-cart-view-btn" type="submit"
 													value="Continue Shopping"
 													href="${pageContext.request.contextPath}/Main">Continue

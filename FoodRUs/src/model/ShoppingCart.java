@@ -15,7 +15,7 @@ public class ShoppingCart
 
 	private Map<String, ShoppingCartItem> shoppingCart;
 
-	public ShoppingCart() throws Exception
+	public ShoppingCart() 
 	{
 		this.shoppingCart = new HashMap<>();
 	}
@@ -29,7 +29,8 @@ public class ShoppingCart
 	{
 		double subTotal = 0.0;
 
-		for (ShoppingCartItem item : this.shoppingCart.values()) {
+		for (ShoppingCartItem item : this.shoppingCart.values())
+		{
 			subTotal += item.getExtendedPrice();
 		}
 
@@ -38,7 +39,10 @@ public class ShoppingCart
 
 	public double computeShippingCost()
 	{
-		return this.computeSubTotal() >= 100.0 ? 0 : SHIPPING;
+		if (this.getNumberOfItems() == 0)
+			return 0.0;
+		else
+			return (this.computeSubTotal() >= 100.0) ? 0 : SHIPPING;
 	}
 
 	public double computeTax()
@@ -72,12 +76,31 @@ public class ShoppingCart
 	/**
 	 * update a list of item's quantity
 	 */
-	public void updateListQty(Map<Item, Integer> itemAndQty)
+	public void updateItems(Map<String, String> items) throws Exception
 	{
-
-		for (Map.Entry<Item, Integer> entry : itemAndQty.entrySet())
+		try
 		{
-			this.updateQty(entry.getKey(), entry.getValue());
+			for (Entry<String, String> entry : items.entrySet())
+			{
+				String itemNumber = entry.getKey();
+				int itemQuantity = Integer.parseInt(entry.getValue());
+
+				if (this.shoppingCart.containsKey(itemNumber))
+				{
+					if (itemQuantity > 0)
+					{
+						this.shoppingCart.get(itemNumber).setQuantity(itemQuantity);
+					} else
+					{
+						this.shoppingCart.remove(itemNumber);
+						System.out.println("size = " + this.getNumberOfItems());
+					}
+				}
+			}
+		} catch (Exception e)
+		{
+			// TODO: handle exception
+			throw new Exception("Update cart: bad data!");
 		}
 
 	}
@@ -103,21 +126,29 @@ public class ShoppingCart
 					shoppingCart.remove(item);
 				} else
 				{
-					//shoppingCart.put(item, quantity);
+					// shoppingCart.put(item, quantity);
 				}
 			} // end of if
 		} // end of while
 	}// end of method
+
+	public void removeItem(String itemNumber)
+	{
+		if (this.shoppingCart.containsKey(itemNumber))
+		{
+			this.shoppingCart.remove(itemNumber);
+		}
+	}
 
 	public Map<String, ShoppingCartItem> getShoppingCart()
 	{
 		return this.shoppingCart;
 	}
 
-//	public void setShoppingCart(Map<Item, Integer> shoppingCart)
-//	{
-//		this.shoppingCart = shoppingCart;
-//	}
+	// public void setShoppingCart(Map<Item, Integer> shoppingCart)
+	// {
+	// this.shoppingCart = shoppingCart;
+	// }
 
 	public void printCart()
 	{
