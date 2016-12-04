@@ -49,12 +49,17 @@ public class addItemFilter implements Filter {
 
 		long timeNewItemInCart = System.nanoTime();
 		long totalTime = timeNewItemInCart - (long) session.getAttribute("startShopping");
+		long averageTime;
 		session.setAttribute("startShopping", timeNewItemInCart);
 		if (sc.getAttribute("averageTimeToCart") == null)
 		{
-			sc.setAttribute("averageTimeToCart", 0);
+			averageTime = totalTime; 
+			sc.setAttribute("averageTimeToCart", averageTime);
+
+		} else {
+			averageTime = (((long) sc.getAttribute("averageTimeToCart")) + totalTime) / 2;
 		}
-		long averageTime = ((int) sc.getAttribute("averageTimeToCart") + totalTime) / 2;
+		System.out.println("average: "+averageTime/ 1000000000.0 +"  newitem:" + timeNewItemInCart/ 1000000000.0 +"  total: "+ totalTime/ 1000000000.0);
 		sc.setAttribute("averageTimeToCart", averageTime);
 	}
 
