@@ -49,6 +49,7 @@ public class CBanalysis implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+		System.out.println("CBanalysis start");
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
@@ -63,10 +64,11 @@ public class CBanalysis implements Filter {
 			ServletContext sc= session.getServletContext();
 			long endTime = System.nanoTime();
 			long totalTime = endTime - (long) session.getAttribute("startTime");
+			
 			if(sc.getAttribute("averageTimeToCheckout")==null){
 				sc.setAttribute("averageTimeToCheckout", 0);
 			}
-			long averageTime = ((long)sc.getAttribute("averageTimeToCheckout") + totalTime)/2;
+			long averageTime = ((int)sc.getAttribute("averageTimeToCheckout") + totalTime)/2;
 			sc.setAttribute("averageTimeToCheckout", averageTime);
 		} else {
 			chain.doFilter(request, response);

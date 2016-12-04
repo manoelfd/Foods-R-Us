@@ -6,12 +6,10 @@
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Insert title here</title>
-</head>
-<body>
-<p>Hello Admin!</p>>
-</body>
-</html>
+<div>
+<p>Hello Admin!</p>
+<div>Average time it takes until a client adds something to the cart: ${averageTimeToCart}</div>
+<div>Average time until a client checks out: ${averageTimeToCheckout}</div>
+
+</div>
 </jsp:root>

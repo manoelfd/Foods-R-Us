@@ -28,7 +28,18 @@ public class Admin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		request.setAttribute("targetPage", "Admin.jspx");
+		request.setAttribute("target", "Admin.jspx");
+		if(getServletContext().getAttribute("averageTimeToCart")!=null){
+			format(request, "averageTimeToCart");
+		} else {
+			request.setAttribute("averageTimeToCart", "No added items yet");
+		}
+		if (getServletContext().getAttribute("averageTimeToCheckout")!=null){
+			format(request, "averageTimeToCheckout");
+		}	
+		else {
+			request.setAttribute("averageTimeToCheckout", "No checkouts yet");
+		}
 		this.getServletContext().getRequestDispatcher("/pages/home.jspx").forward(request, response);
 	}
 
@@ -40,4 +51,10 @@ public class Admin extends HttpServlet {
 		doGet(request, response);
 	}
 
+	private double format(HttpServletRequest request, String name){
+		double seconds = (long)getServletContext().getAttribute(name) / 1000000000.0;
+		seconds = Math.round(seconds * 100.0) / 100.0;
+		request.setAttribute(name, seconds +" seconds");
+		return seconds;
+	}
 }

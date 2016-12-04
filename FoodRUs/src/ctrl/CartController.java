@@ -33,15 +33,6 @@ public class CartController extends HttpServlet
 	public void init() throws ServletException
 	{
 		super.init();
-		try
-		{
-			ShoppingCart userCart = new ShoppingCart();
-			this.getServletContext().setAttribute("shoppingCart", userCart);
-
-		} catch (Exception e)
-		{
-			throw new ServletException("Init Error in CartController ", e);
-		}
 
 	}
 

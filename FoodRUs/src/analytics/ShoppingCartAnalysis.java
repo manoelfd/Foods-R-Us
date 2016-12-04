@@ -30,6 +30,7 @@ public class ShoppingCartAnalysis implements HttpSessionAttributeListener, HttpS
 		HttpSession session = se.getSession();
 		long startTime = System.nanoTime();
 		session.setAttribute("startShopping", startTime);
+		System.out.println("Session created at: "+ startTime);
     }
 
 	/**
@@ -57,18 +58,7 @@ public class ShoppingCartAnalysis implements HttpSessionAttributeListener, HttpS
      * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
      */
     public void attributeReplaced(HttpSessionBindingEvent se)  { 
-    	if(se.getName().equals("shoppingCart")){
-		HttpSession session = se.getSession();
-		ServletContext sc= session.getServletContext();
 
-		long timeNewItemInCart = System.nanoTime();
-		long totalTime = timeNewItemInCart - (long) session.getAttribute("startShoppig");
-		session.setAttribute("startShopping", timeNewItemInCart);
-		if(sc.getAttribute("averageTimeUntilCart")==null){
-			sc.setAttribute("averageTimeUntilCart", 0);
-		}
-		long averageTime = ((long)sc.getAttribute("averageTimeUntilCart") + totalTime)/2;
-		sc.setAttribute("averageTimeUntilCart", averageTime);
-		}
+    	
     }
 }
