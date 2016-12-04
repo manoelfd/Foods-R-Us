@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class addItemFilter
  */
 @WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
-					, urlPatterns = { "/AddItemController" })
+					, urlPatterns = { "/AddItemControlle" })
 public class addItemFilter implements Filter {
 
     /**
