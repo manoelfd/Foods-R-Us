@@ -1,8 +1,10 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.naming.NamingException;
 
@@ -37,9 +39,15 @@ public class CatalogModel
 		return categorys;
 	}
 // yo
-	public HashMap<Category, List<Item>> getCatalog()
+	public TreeMap<Category, List<Item>> getCatalog()
 	{
-		HashMap<Category, List<Item>> catalog = new HashMap<Category, List<Item>>();
+		TreeMap<Category, List<Item>> catalog = new TreeMap<Category, List<Item>>(new Comparator<Category>()
+	    {
+	        public int compare(Category o1, Category o2)
+	        {
+	            return o1.getName().compareTo(o2.getName());
+	        } 
+	});
 		List<Category> categories = this.getCategories();
 		for (Category category : categories)
 		{
