@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" 
+		xmlns:my="urn:jsptld:/WEB-INF/taglib.tld"
+	version="2.0">
 	<!-- start single product item -->
 	<!-- requires name, number, quantity/unit, price -->
 	<!--  yo -->
 	<li>
 		<figure>
-			<a class="aa-product-img" href="#"><img
-				src="${pageContext.request.contextPath}/res/img/man/polo-shirt-2.png" alt="polo shirt img" /></a>
+			<a class="aa-product-img" href="#">
+			 
+			  <!--  <my:picture categoryID="${param.category}"></my:picture>  -->
+			  <img src='${pageContext.request.contextPath}/res/img/project/${param.category}.png'/>  
+				
+			</a>
 			<a class="aa-add-card-btn" href="${pageContext.request.contextPath}/AddItemController?itemnumber=${param.number}"><span
 				class="fa fa-shopping-cart"></span>Add To Cart</a>
 			<figcaption>

@@ -1,0 +1,18 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>Custom Tags</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>CustomTagLibrary4413</short-name>
+		<tag>
+		<description>Custom tag with attribute</description>
+		<name>picture</name>
+		<tag-class>Tag.PictureTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>categoryID</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>
