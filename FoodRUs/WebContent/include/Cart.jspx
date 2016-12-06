@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:f="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<!-- cart header banner section -->
+	<section id="aa-catg-head-banner">
+		<img
+			src="${pageContext.request.contextPath}/res/img/fashion/fashion-header-bg-8.jpg"
+			alt="fashion img" />
+		<div class="aa-catg-head-banner-area">
+			<div class="container">
+				<div class="aa-catg-head-banner-content">
+					<h2>Cart Page</h2>
+					<ol class="breadcrumb">
+						<li><a href="index.html">Home</a></li>
+						<li class="active">Cart</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--  cart header banner section -->
+	<!-- / menu -->
+	<!-- Cart view section -->
+	<section id="cart-view">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cart-view-area">
+						<div class="cart-view-table">
+							<form action="${pageContext.request.contextPath}/CartController"
+								method="POST">
+								<div class="table-responsive">
+									<table class="table">
+
+										<thead>
+											<tr>
+												<th></th>
+												<th>Item</th>
+												<th>Item Number</th>
+												<th>Price</th>
+												<th>Quantity</th>
+												<th>Extended</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<c:forEach
+												items="${sessionScope.shoppingcart.getShoppingCart()}"
+												var="itemPair" varStatus="count">
+												<tr>
+													<td><a class="remove"
+														href="${pageContext.request.contextPath}/CartController/removeItem?itemNumber=${itemPair.value.item.number}"><fa
+																class="fa fa-close"></fa></a></td>
+													<td>${itemPair.value.item.name}</td>
+													<input type="hidden" name="Item${count.index}"
+														value="${itemPair.value.item.number}" />
+													<td>${itemPair.value.item.number}</td>
+													<td><jsp:param
+																name="price" value="${itemPair.value.item.price}" />$<f:formatNumber
+																groupingUsed="true" maxFractionDigits="2"
+																minFractionDigits="2" minIntegerDigits="1">${itemPair.value.item.price}</f:formatNumber></td>
+													<td><input class="aa-cart-quantity" type="number"
+														name="Quantity${count.index}" min="0"
+														oninput="validity.valid||(value='');"
+														value="${itemPair.value.quantity}" /></td>
+													<td><jsp:param
+																name="sum"
+																value="${itemPair.value.item.getExtendedPrice()}" />$<f:formatNumber
+																groupingUsed="true" maxFractionDigits="2"
+																minFractionDigits="2" minIntegerDigits="1">${itemPair.value.getExtendedPrice()}</f:formatNumber></td>
+
+												</tr>
+												<!-- params go here -->
+											</c:forEach>
+
+											<!--
+                      <tr>
+                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                        <td><a href="#"><img src="${pageContext.request.contextPath}/res/img/man/polo-shirt-2.png" alt="img" /></a></td>
+                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
+                        <td>$150</td>
+                        <td><input class="aa-cart-quantity" type="number" value="1" /></td>
+                        <td>$150</td>
+                      </tr>
+                      <tr>
+                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                        <td><a href="#"><img src="${pageContext.request.contextPath}/res/img/man/polo-shirt-3.png" alt="img" /></a></td>
+                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
+                        <td>$50</td>
+                        <td><input class="aa-cart-quantity" type="number" value="1" /></td>
+                        <td>$50</td>
+                      </tr> 
+                      -->
+											<tr>
+												<td colspan="6" class="aa-cart-view-bottom">
+													<div class="aa-cart-coupon">
+														<!--  <input class="aa-coupon-code" type="text" placeholder="Coupon" /> -->
+														<input class="aa-cart-view-btn" type="submit"
+															name="Update" value="Update Cart" />
+													</div> <a class="aa-cart-view-btn" type="submit"
+													value="Continue Shopping"
+													href="${pageContext.request.contextPath}/Main">Continue
+														Shopping</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</form>
+							<!-- Cart Total view -->
+							<div class="cart-view-total">
+								<h4>Cart Totals</h4>
+								<table class="aa-totals-table">
+									<tbody>
+										<tr>
+											<th>Subtotal</th>
+											<td>$<f:formatNumber groupingUsed="true"
+													maxFractionDigits="2" minFractionDigits="2"
+													minIntegerDigits="1">${sessionScope.shoppingcart.computeSubTotal()}</f:formatNumber></td>
+										</tr>
+										<tr>
+											<th>Shipping Cost</th>
+											<td>$<f:formatNumber groupingUsed="true"
+													maxFractionDigits="2" minFractionDigits="2"
+													minIntegerDigits="1">${sessionScope.shoppingcart.computeShippingCost()}</f:formatNumber></td>
+										</tr>
+										<tr>
+
+											<th>HST</th>
+											<td>$<f:formatNumber groupingUsed="true"
+													maxFractionDigits="2" minFractionDigits="2"
+													minIntegerDigits="1">${sessionScope.shoppingcart.computeTax()}</f:formatNumber></td>
+										</tr>
+										<tr>
+											<th>Grand Total</th>
+											<td>$<f:formatNumber groupingUsed="true"
+													maxFractionDigits="2" minFractionDigits="2"
+													minIntegerDigits="1">${sessionScope.shoppingcart.computeGrandTotal()}</f:formatNumber></td>
+										</tr>
+									</tbody>
+								</table>
+								<a
+									href="${pageContext.request.contextPath}/CartController/Confirm"
+									class="aa-cart-view-btn">Proceed to Checkout</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- / Cart view section -->
+</jsp:root>

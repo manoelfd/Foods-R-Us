@@ -136,7 +136,6 @@ public class ItemDAO
 				item = this.createItem(rs);
 				list.add(item);
 			}
-			System.out.println("done");
 		}
 		catch (Exception e)
 		{

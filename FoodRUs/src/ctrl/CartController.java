@@ -1,8 +1,11 @@
 package ctrl;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.Item;
+import daos.ItemDAO;
+import model.CatalogModel;
+import model.PurchaseOrderUtility;
 import model.ShoppingCart;
 
 /**
@@ -43,6 +50,7 @@ public class CartController extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		// TODO Auto-generated method stub
+		String target = "Cart.jspx";
 		HttpSession sn = request.getSession();
 		ShoppingCart cart = (ShoppingCart) sn.getAttribute("shoppingcart");
 		if (cart == null) // TEMP -- make this better.
@@ -75,13 +83,53 @@ public class CartController extends HttpServlet
 				// TODO: handle exception
 				System.out.println("Something went wrong when trying to update the shopping cart");
 			}
-		} else if (request.getPathInfo() != null && request.getPathInfo().equals("/removeItem") && request.getParameter("itemNumber") != null)
+		} else if (request.getPathInfo() != null && request.getPathInfo().equals("/removeItem")
+				&& request.getParameter("itemNumber") != null)
 		{
 			cart.removeItem(request.getParameter("itemNumber"));
-		}
-		request.setAttribute("target", "pages/cart.jspx");
+		} else if (request.getPathInfo() != null && request.getPathInfo().equals("/addItem")
+				&& request.getParameter("itemNumber") != null)
+		{
 
-		this.getServletContext().getRequestDispatcher("/pages/cart.jspx").forward(request, response);
+			String itemNumber = request.getParameter("itemNumber");
+			// System.out.println("Item number: " + number);
+			CatalogModel model = (CatalogModel) this.getServletContext().getAttribute("catalogModel");
+			Item item = model.getItem(itemNumber);
+			System.out.println("AddController Item: " + item.toString());
+
+			if (item != null)
+				cart.addItem(item);
+
+		} else if (request.getPathInfo() != null && request.getPathInfo().equals("/Confirm"))
+		{
+			target = "ConfirmOrder.jspx";
+		} else if (request.getPathInfo() != null && request.getPathInfo().equals("/Checkout"))
+		{
+			System.out.println("Checking out!");
+			if (request.getSession().getAttribute("loggedIn") == null)
+			{
+				// client needs to authenticate
+				request.setAttribute("ref", "/CartController/Checkout");
+				this.getServletContext().getRequestDispatcher("/Login").forward(request, response);
+				return;
+			} else
+			{
+				// client is authenticated
+				if (cart.getNumberOfItems() > 0)
+				{
+					// 1. find the next purchase order number
+					String username = (String) request.getSession().getAttribute("loggedIn");
+					//
+					PurchaseOrderUtility.generatePurchaseOrder(username, cart,
+							this.getServletContext().getRealPath("/purchases"));
+					cart.empty();
+				}
+
+			}
+		}
+		request.setAttribute("target", target);
+
+		this.getServletContext().getRequestDispatcher("/pages/home.jspx").forward(request, response);
 	}
 
 	/**

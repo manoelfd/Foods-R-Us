@@ -14,7 +14,7 @@
 			  <img src='${pageContext.request.contextPath}/res/img/project/${param.category}.png'/>  
 				
 			</a>
-			<a class="aa-add-card-btn" href="${pageContext.request.contextPath}/AddItemController?itemnumber=${param.number}"><span
+			<a class="aa-add-card-btn" href="${pageContext.request.contextPath}/CartController/addItem?itemNumber=${param.number}"><span
 				class="fa fa-shopping-cart"></span>Add To Cart</a>
 			<figcaption>
 				<h4 class="aa-product-title">

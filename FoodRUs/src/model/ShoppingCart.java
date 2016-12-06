@@ -139,6 +139,10 @@ public class ShoppingCart
 			this.shoppingCart.remove(itemNumber);
 		}
 	}
+	
+	public void empty() {
+		this.shoppingCart.clear();
+	}
 
 	public Map<String, ShoppingCartItem> getShoppingCart()
 	{

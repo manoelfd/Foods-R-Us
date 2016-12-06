@@ -67,5 +67,19 @@ public class CatalogModel
 
 		return catalog;
 	}
+	public Item getItem(String itemNumber) {
+		Item item;
+		try
+		{
+			item  = new ItemDAO().getItemById(itemNumber);
+		} catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			item = null;
+		} 
+		return item;
+		
+	}
 
 }
