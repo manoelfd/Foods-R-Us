@@ -102,7 +102,10 @@ public class CartController extends HttpServlet
 
 		} else if (request.getPathInfo() != null && request.getPathInfo().equals("/Confirm"))
 		{
-			target = "ConfirmOrder.jspx";
+			if (cart.getNumberOfItems() > 0)
+			{
+				target = "ConfirmOrder.jspx";
+			}
 		} else if (request.getPathInfo() != null && request.getPathInfo().equals("/Checkout"))
 		{
 			System.out.println("Checking out!");
