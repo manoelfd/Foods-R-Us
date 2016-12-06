@@ -17,23 +17,27 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class CrossSelling
  */
-@WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
-					, urlPatterns = { "/AddItemController" })
-public class CrossSelling implements Filter {
-	private String crossSellingName= "Semi-Monterey Cheese";
+@WebFilter(dispatcherTypes =
+{ DispatcherType.REQUEST }, urlPatterns =
+{ "/CartController", "/CartController/*" })
+public class CrossSelling implements Filter
+{
+	private String crossSellingName = "Semi-Monterey Cheese";
 	private String href = "/FoodRUs/search?searchKey=semi-monterey+cheese+by+gk";
 
-    /**
-     * Default constructor. 
-     */
-    public CrossSelling() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public CrossSelling()
+	{
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
 	 */
-	public void destroy() {
+	public void destroy()
+	{
 		// TODO Auto-generated method stub
 	}
 
@@ -47,36 +51,45 @@ public class CrossSelling implements Filter {
 		HttpSession session = req.getSession();
 		ServletContext sc = session.getServletContext();
 
-	//	try
+		if (req.getPathInfo() != null && req.getPathInfo().equals("/addItem"))
 		{
-			if (request.getParameter("itemnumber").equals("1409S413"))
+			// try
 			{
-				MyResponse myResp = new MyResponse((HttpServletResponse) response);
-				chain.doFilter(request, myResp);
+				if (request.getParameter("itemNumber").equals("1409S413"))
+				{
+					MyResponse myResp = new MyResponse((HttpServletResponse) response);
+					chain.doFilter(request, myResp);
 
-				String result = myResp.getContent();
+					String result = myResp.getContent();
 
-				String lim = "<div>Products you may be interested in:<a href=\"" + href + "\"> " + crossSellingName + "</a</div>";
-				String replacement = "\"aa-cart-view-bottom\" colspan=\"6\">" + lim;
-				result = result.replaceAll("\"aa-cart-view-bottom\" colspan=\"6\">", replacement);
+					String lim = "<div>Products you may be interested in:<a href=\"" + href + "\"> " + crossSellingName
+							+ "</a</div>";
+					String replacement = "\"aa-cart-view-bottom\" colspan=\"6\">" + lim;
+					result = result.replaceAll("\"aa-cart-view-bottom\" colspan=\"6\">", replacement);
 
-				response.getWriter().println(result);
-			} else
-			{
-				chain.doFilter(request, response);
+					response.getWriter().println(result);
+				} else
+				{
+					chain.doFilter(request, response);
+				}
 			}
-		}
-		/*catch (NullPointerException e)
+		} else
 		{
-			System.out.println("Filter for Cross Selling Error");
 			chain.doFilter(request, response);
-		}*/
+		}
+
+		/*
+		 * catch (NullPointerException e) {
+		 * System.out.println("Filter for Cross Selling Error");
+		 * chain.doFilter(request, response); }
+		 */
 	}
 
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
-	public void init(FilterConfig fConfig) throws ServletException {
+	public void init(FilterConfig fConfig) throws ServletException
+	{
 		// TODO Auto-generated method stub
 	}
 

@@ -74,6 +74,7 @@
 					<jsp:param name="number" value="${item.number}" />
 					<jsp:param name="quantity" value="${item.qty}" />
 					<jsp:param name="price" value="${item.price}" />
+					<jsp:param name="category" value="${item.catId}"/>				
 				</jsp:include>
 			</c:forEach>
 		</ul>
