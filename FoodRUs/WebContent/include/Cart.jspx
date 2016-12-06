@@ -4,7 +4,7 @@
 	<!-- cart header banner section -->
 	<section id="aa-catg-head-banner">
 		<img
-			src="${pageContext.request.contextPath}/res/img/fashion/fashion-header-bg-8.jpg"
+			src="${pageContext.request.contextPath}/res/img/project/banner.png"
 			alt="fashion img" />
 		<div class="aa-catg-head-banner-area">
 			<div class="container">
