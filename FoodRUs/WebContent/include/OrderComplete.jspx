@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <section id="aa-error">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-error-area">
+            <span>Purchase Complete.</span>
+            <p><a href="${pageContext.request.contextPath}${requestScope.poURL}"><b><u>Click here to view your purchase order receipt.</u></b></a></p>
+            <a href="${pageContext.request.contextPath}">Continue Shopping</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</jsp:root>

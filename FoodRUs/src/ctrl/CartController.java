@@ -123,9 +123,12 @@ public class CartController extends HttpServlet
 					// 1. find the next purchase order number
 					String username = (String) request.getSession().getAttribute("loggedIn");
 					//
-					PurchaseOrderUtility.generatePurchaseOrder(username, cart,
+					String poLocation = PurchaseOrderUtility.generatePurchaseOrder(username, cart,
 							this.getServletContext().getRealPath("/purchases"));
+					System.out.println("PO generated at: "+poLocation);
 					cart.empty();
+					target = "OrderComplete.jspx";
+					request.setAttribute("poURL", "/purchases/"+poLocation);
 				}
 
 			}

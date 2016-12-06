@@ -14,7 +14,7 @@ import javax.xml.transform.stream.StreamResult;
 public class PurchaseOrderUtility
 {
 
-	public static void generatePurchaseOrder(String username, ShoppingCart cart, String directory)
+	public static String generatePurchaseOrder(String username, ShoppingCart cart, String directory)
 	{
 		System.out.println("file exists: " + new File(directory + "/test").exists());
 		try
@@ -47,12 +47,15 @@ public class PurchaseOrderUtility
 			fw.write(output.toString());
 			fw.close();
 			System.out.println("The file was written: " + new File(directory + File.separator + filename).exists());
+			return filename;
 		} catch (Exception e)
 		{
 			System.out.println("Something went wrong with generating the purchase order!");
 			e.printStackTrace();
+			return null;
 
 		}
+
 	}
 
 	private static String getPOFileName(String username, String directory)
