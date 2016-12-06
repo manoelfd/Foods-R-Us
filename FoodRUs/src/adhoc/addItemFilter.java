@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class addItemFilter
  */
 @WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
-					, urlPatterns = { "/AddItemController" })
+					, urlPatterns = { "/CartController", "/CartController/*" })
 public class addItemFilter implements Filter {
 
     /**
@@ -40,11 +40,13 @@ public class addItemFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		chain.doFilter(req, res);
-		//System.out.println("itemAdded");
+		
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
+		System.out.println(request.getPathInfo());
+		if(request.getPathInfo() != null && request.getPathInfo().equals("/addItem")){
+		//	System.out.println("itemAdded");
 		HttpSession session = request.getSession();
-
 		ServletContext sc = session.getServletContext();
 
 		long timeNewItemInCart = System.nanoTime();
@@ -61,6 +63,7 @@ public class addItemFilter implements Filter {
 		}
 		System.out.println("average: "+averageTime/ 1000000000.0 +"  newitem:" + timeNewItemInCart/ 1000000000.0 +"  total: "+ totalTime/ 1000000000.0);
 		sc.setAttribute("averageTimeToCart", averageTime);
+		}
 	}
 
 	/**

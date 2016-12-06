@@ -20,13 +20,12 @@ import javax.servlet.http.HttpSession;
 @WebFilter(
 		dispatcherTypes = {
 				DispatcherType.REQUEST, 
-				DispatcherType.FORWARD
 		}
 					, 
 		description = "Check average time until checkout", 
 		urlPatterns = { 
 				"/Main", 
-				"/Checkout"
+				"/CartController/*"
 		})
 public class CBanalysis implements Filter {
 
@@ -49,27 +48,32 @@ public class CBanalysis implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		System.out.println("CBanalysis start");
+		//System.out.println("CBanalysis start");
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
 		String url = request.getServletPath();
-
+		
+		if(session.getAttribute("myTime")!=null){
+			chain.doFilter(request, response);
+			return;
+		}
 		if(url.equals("/Main")&&session.getAttribute("startTime")==null){
 			long startTime = System.nanoTime();
 			session.setAttribute("startTime", startTime);
 			chain.doFilter(request, response);
-		} else if (url.equals("/Checkout.jspx")){
+		} else if (request.getPathInfo() != null && request.getPathInfo().equals("/Checkout")){
 			chain.doFilter(request, response);
 			ServletContext sc= session.getServletContext();
 			long endTime = System.nanoTime();
 			long totalTime = endTime - (long) session.getAttribute("startTime");
-			
+			session.setAttribute("myTime", totalTime);
 			if(sc.getAttribute("averageTimeToCheckout")==null){
-				sc.setAttribute("averageTimeToCheckout", 0);
-			}
-			long averageTime = ((int)sc.getAttribute("averageTimeToCheckout") + totalTime)/2;
+				sc.setAttribute("averageTimeToCheckout", totalTime);
+			} else {
+			long averageTime = ((long)sc.getAttribute("averageTimeToCheckout") + totalTime)/2;
 			sc.setAttribute("averageTimeToCheckout", averageTime);
+			}
 		} else {
 			chain.doFilter(request, response);
 		}
