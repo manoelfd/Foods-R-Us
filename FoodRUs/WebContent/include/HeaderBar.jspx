@@ -34,7 +34,7 @@
 												<div class="dropdown">
 													<a class="btn dropdown-toggle" href="#" type="button"
 														id="dropdownMenu1" data-toggle="dropdown"
-														aria-haspopup="true" aria-expanded="true">${sessionScope.loggedIn}<span
+														aria-haspopup="true" aria-expanded="true">${sessionScope.loggedIn.userName}<span
 														class="caret"></span>
 													</a>
 													<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

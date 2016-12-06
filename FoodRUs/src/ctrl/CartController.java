@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Item;
+import beans.UserProfile;
 import daos.ItemDAO;
 import model.CatalogModel;
 import model.PurchaseOrderUtility;
@@ -121,9 +122,9 @@ public class CartController extends HttpServlet
 				if (cart.getNumberOfItems() > 0)
 				{
 					// 1. find the next purchase order number
-					String username = (String) request.getSession().getAttribute("loggedIn");
+					UserProfile user = (UserProfile) request.getSession().getAttribute("loggedIn");
 					//
-					String poLocation = PurchaseOrderUtility.generatePurchaseOrder(username, cart,
+					String poLocation = PurchaseOrderUtility.generatePurchaseOrder(user, cart,
 							this.getServletContext().getRealPath("/purchases"));
 					System.out.println("PO generated at: "+poLocation);
 					cart.empty();

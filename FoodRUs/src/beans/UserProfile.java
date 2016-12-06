@@ -2,20 +2,20 @@ package beans;
 
 public class UserProfile
 {
-	private String account;
+	private String name;
 	private String username;
 	
 	public UserProfile() {
-		account = null;
+		name = null;
 		username = null;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getName() {
+		return name;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUserName() {

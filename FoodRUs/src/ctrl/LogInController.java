@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.UserProfile;
 import model.CatalogModel;
 
 /**
@@ -72,10 +73,16 @@ public class LogInController extends HttpServlet
 						MessageDigest.getInstance("SHA1").digest((username + "paranoidandroid").getBytes()));
 				System.out.println("hash: " + hash);
 				System.out.println("username hash: " + usernameHash);
+
 				if (hash.equalsIgnoreCase(usernameHash))
 				{
 					System.out.println("User auth'd succesfully!");
-					request.getSession().setAttribute("loggedIn", username);
+					String name = request.getParameter("name");
+					System.out.println("name: " + name.replaceAll("%20", " "));
+					UserProfile user = new UserProfile();
+					user.setUserName(username);
+					user.setName(name.replaceAll("%20", " "));
+					request.getSession().setAttribute("loggedIn", user);
 				} else
 				{
 					request.getSession().removeAttribute("loggedIn");
@@ -113,7 +120,7 @@ public class LogInController extends HttpServlet
 		{
 			if (ref != null)
 			{
-				//System.out.println("ref: " + ref);
+				// System.out.println("ref: " + ref);
 				this.getServletContext().getRequestDispatcher(ref).forward(request, response);
 				// response.sendRedirect(request.getContextPath()+ref);
 			} else
@@ -124,7 +131,7 @@ public class LogInController extends HttpServlet
 			String reff = (String) request.getAttribute("ref");
 			String oauth = "https://www.eecs.yorku.ca/~cse23116/auth/Auth.cgi?back=" + me
 					+ (reff == null ? "" : "&ref=" + reff);
-			//System.out.println(oauth);
+			// System.out.println(oauth);
 			response.sendRedirect(oauth);
 		}
 

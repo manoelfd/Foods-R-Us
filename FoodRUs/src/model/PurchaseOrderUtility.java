@@ -11,15 +11,17 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.transform.stream.StreamResult;
 
+import beans.UserProfile;
+
 public class PurchaseOrderUtility
 {
 
-	public static String generatePurchaseOrder(String username, ShoppingCart cart, String directory)
+	public static String generatePurchaseOrder(UserProfile user, ShoppingCart cart, String directory)
 	{
 		System.out.println("file exists: " + new File(directory + "/test").exists());
 		try
 		{
-			String filename = getPOFileName(username, directory);
+			String filename = getPOFileName(user.getUserName(), directory);
 			// the PO number will be greatestnumber + 1
 			ArrayList<ShoppingCartItemWrapper> itemsWrapped = new ArrayList<>();
 			for (ShoppingCartItem item : cart.getShoppingCart().values())
@@ -27,7 +29,7 @@ public class PurchaseOrderUtility
 				itemsWrapped.add(new ShoppingCartItemWrapper(item));
 			}
 
-			PurchaseOrder p = new PurchaseOrder(getPONumber(username, directory), new Date(), new CustomerWrapper("cse23116", "cse23116"),
+			PurchaseOrder p = new PurchaseOrder(getPONumber(user.getUserName(), directory), new Date(), new CustomerWrapper(user.getUserName(), user.getName()),
 					itemsWrapped, cart.computeSubTotal(), cart.computeShippingCost(), cart.computeTax(),
 					cart.computeGrandTotal());
 			StringWriter output = new StringWriter();
