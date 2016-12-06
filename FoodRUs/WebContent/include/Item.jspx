@@ -23,7 +23,7 @@
 				<span class="aa-product-price">$<f:formatNumber
 						groupingUsed="true" maxFractionDigits="2" minFractionDigits="2"
 						minIntegerDigits="1">${param.price}</f:formatNumber>
-					${param.quantity}
+					${param.quantity eq "0" ? "EACH" : param.quantity}
 				</span>
 			</figcaption>
 		</figure>
