@@ -1,4 +1,4 @@
-# Foods-R-Us: An E-Commerce Website
+# Foods-R-Us: A Java EE E-Commerce Website
 ![Demo](docs/demo.gif)
 
 ## Technological Requirements
