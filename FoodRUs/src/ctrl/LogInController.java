@@ -28,11 +28,6 @@ public class LogInController extends HttpServlet
 	public LogInController()
 	{
 		super();
-		// TODO Auto-generated constructor stub
-		// this is a test comment
-		// hi
-		// Hello
-		// Project done
 	}
 
 	/**
@@ -41,30 +36,12 @@ public class LogInController extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// System.out.println("loggedIn1 @request: " +
-		// request.getAttribute("loggedIn"));
-		// System.out.println("loggedIn1 @session: " +
-		// request.getSession().getAttribute("loggedIn"));
-		// System.out.println("Catalog1 @request: " +
-		// request.getAttribute("catalog"));
 		String username = request.getParameter("user");
 		String hash = request.getParameter("hash");
 		String ref = request.getParameter("ref");
 
 		String target = null;
 
-		// if (request.getParameter("hash") == null &&
-		// request.getSession().getAttribute("loggedIn") == null)
-		// {
-		// target = (String) request.getAttribute("target");
-		// // System.out.println("target1: " + target);
-		//
-		// String me = request.getRequestURL().toString();
-		// String oauth =
-		// "https://www.eecs.yorku.ca/~cse23116/auth/Auth.cgi?back=";
-		// response.sendRedirect(oauth + me);
-		// initiateCatalog(request);
-		// } else
 		if (username != null && hash != null)
 		{
 			try
@@ -95,8 +72,6 @@ public class LogInController extends HttpServlet
 
 		}
 		System.out.println(request.getServletPath());
-		// if(request.getParameter("signout") != null &&
-		// request.getParameter("signout").equals("Sign Out")){
 		if (request.getServletPath().equals("/Logout"))
 		{
 			request.getSession().removeAttribute("loggedIn");
@@ -104,16 +79,7 @@ public class LogInController extends HttpServlet
 			request.setAttribute("target", "Catalog.jspx");
 			this.getServletContext().getRequestDispatcher("/pages/home.jspx").forward(request, response);
 			return;
-			// page = "page/home.jspx";// or logout page
 		}
-
-		// System.out.println("loggedIn2 @request: " +
-		// request.getAttribute("loggedIn"));
-		// System.out.println("loggedIn2 @session: " +
-		// request.getSession().getAttribute("loggedIn"));
-		// System.out.println("target2: " + request.getAttribute("target"));
-		// System.out.println("Catalog2 @request: " +
-		// request.getAttribute("catalog"));
 
 		initiateCatalog(request);
 		if (request.getSession().getAttribute("loggedIn") != null)
@@ -131,7 +97,6 @@ public class LogInController extends HttpServlet
 			String reff = (String) request.getAttribute("ref");
 			String oauth = "https://www.eecs.yorku.ca/~cse23116/auth/Auth.cgi?back=" + me
 					+ (reff == null ? "" : "&ref=" + reff);
-			// System.out.println(oauth);
 			response.sendRedirect(oauth);
 		}
 
